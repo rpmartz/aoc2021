@@ -17,7 +17,7 @@ def do_part_one():
 
 def do_part_two():
     lines = read_file()
-    previous_sum = 1234567899887  # arbitraily large first value
+    previous_sum = 1234567899887  # arbitrarily large first value
     num_increases = 0
 
     for idx in range(0, len(lines) - 2):
