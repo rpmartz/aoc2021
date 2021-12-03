@@ -28,3 +28,18 @@ if __name__ == '__main__':
             count_for_bit_at_index = bit_count_for_index[bit]
             count_for_bit_at_index += 1
             bit_count_for_index[bit] = count_for_bit_at_index
+
+    result = []
+    for bit_count in positions_to_bit_counts.values():
+        if bit_count['0'] > bit_count['1']:
+            result.append('0')
+        else:
+            result.append('1')
+
+    gamma = int(''.join(result), 2)
+    inverse = int('111111111111', 2)
+    epsilon = gamma ^ inverse
+
+    print('gamma: %d' % (gamma))
+    print('epsilon: %d' % (epsilon))
+    print('gamma * epsilon = %d' % (gamma * epsilon))
