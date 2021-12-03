@@ -19,7 +19,6 @@ def part_one(lines):
         11: {'0': 0, '1': 0}
     }
 
-    lines = read_file()
     for line in lines:
         for index, bit in enumerate(line):
             bit_count_for_index = positions_to_bit_counts[index]
