@@ -119,22 +119,6 @@ def find_co2_scrubber_rating(lines):
     return co2_scrubber_rtg_as_int
 
 def part_two(lines):
-    # life_support_rating = oxygen_generator_rating * co2_scrubbter_rating
-    positions_to_bit_counts = {
-        0: {'0': 0, '1': 0},
-        1: {'0': 0, '1': 0},
-        2: {'0': 0, '1': 0},
-        3: {'0': 0, '1': 0},
-        4: {'0': 0, '1': 0},
-        5: {'0': 0, '1': 0},
-        6: {'0': 0, '1': 0},
-        7: {'0': 0, '1': 0},
-        8: {'0': 0, '1': 0},
-        9: {'0': 0, '1': 0},
-        10: {'0': 0, '1': 0},
-        11: {'0': 0, '1': 0}
-    }
-
     co2_scrubber_as_int = find_co2_scrubber_rating(lines)
     o2_gen_rating_as_int = find_o2_gen_rating(lines)
 
