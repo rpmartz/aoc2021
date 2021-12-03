@@ -135,8 +135,8 @@ def part_two(lines):
         11: {'0': 0, '1': 0}
     }
 
-    co2_scrubber_as_int = find_co2_scrubber_rating(lines, positions_to_bit_counts)
-    o2_gen_rating_as_int = find_o2_gen_rating(lines, positions_to_bit_counts)
+    co2_scrubber_as_int = find_co2_scrubber_rating(lines)
+    o2_gen_rating_as_int = find_o2_gen_rating(lines)
 
     print(co2_scrubber_as_int * o2_gen_rating_as_int)
 
