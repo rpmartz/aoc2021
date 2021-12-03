@@ -59,33 +59,7 @@ def take_where(binary_strings, position, value):
 
     return result
 
-def part_two(lines):
-    # life_support_rating = oxygen_generator_rating * co2_scrubbter_rating
-    positions_to_bit_counts = {
-        0: {'0': 0, '1': 0},
-        1: {'0': 0, '1': 0},
-        2: {'0': 0, '1': 0},
-        3: {'0': 0, '1': 0},
-        4: {'0': 0, '1': 0},
-        5: {'0': 0, '1': 0},
-        6: {'0': 0, '1': 0},
-        7: {'0': 0, '1': 0},
-        8: {'0': 0, '1': 0},
-        9: {'0': 0, '1': 0},
-        10: {'0': 0, '1': 0},
-        11: {'0': 0, '1': 0}
-    }
-
-    lines = read_file()
-    for line in lines:
-        for index, bit in enumerate(line):
-            bit_count_for_index = positions_to_bit_counts[index]
-
-            count_for_bit_at_index = bit_count_for_index[bit]
-            count_for_bit_at_index += 1
-            bit_count_for_index[bit] = count_for_bit_at_index
-
-
+def find_o2_gen_rating(lines, positions_to_bit_counts):
     o2_gen_rating = None
     o2_results = lines
     for i in range(0, 12):
@@ -93,16 +67,28 @@ def part_two(lines):
         if bit_counts['0'] > bit_counts['1']:
             more_freq_bit = '0'
         else:
-            print('keeping numbers with bit of 1 at position %d' % i)
             more_freq_bit = '1'
 
         o2_results = take_where(o2_results, i, more_freq_bit)
         if len(o2_results) == 1:
             o2_gen_rating = o2_results[0]
 
-
     if o2_gen_rating is None:
         raise Exception('Could not find O2 rating')
+
+    o2_gen_as_int = int(''.join(o2_gen_rating), 2)
+    print('o2 gen rating of [%s] is %d' % (o2_gen_rating, o2_gen_as_int))
+
+    return o2_gen_as_int
+
+def find_co2_scrubber_rating(lines, positions_to_bit_counts):
+    for line in lines:
+        for index, bit in enumerate(line):
+            bit_count_for_index = positions_to_bit_counts[index]
+
+            count_for_bit_at_index = bit_count_for_index[bit]
+            count_for_bit_at_index += 1
+            bit_count_for_index[bit] = count_for_bit_at_index
 
     co2_scrubber_rating = None
     co2_results = lines
@@ -120,9 +106,33 @@ def part_two(lines):
     if co2_scrubber_rating is None:
         raise Exception('Could not find CO2 scrubber rating')
 
+    co2_scrubber_rtg_as_int = int(''.join(co2_scrubber_rating), 2)
+    print('o2 gen rating of [%s] is %d' % (co2_scrubber_rating, co2_scrubber_rtg_as_int))
 
-    co2_scrubber_as_int = int(''.join(co2_scrubber_rating), 2)
-    o2_gen_rating_as_int = int(''.join(o2_gen_rating), 2)
+    return co2_scrubber_rtg_as_int
+
+def part_two(lines):
+    # life_support_rating = oxygen_generator_rating * co2_scrubbter_rating
+    positions_to_bit_counts = {
+        0: {'0': 0, '1': 0},
+        1: {'0': 0, '1': 0},
+        2: {'0': 0, '1': 0},
+        3: {'0': 0, '1': 0},
+        4: {'0': 0, '1': 0},
+        5: {'0': 0, '1': 0},
+        6: {'0': 0, '1': 0},
+        7: {'0': 0, '1': 0},
+        8: {'0': 0, '1': 0},
+        9: {'0': 0, '1': 0},
+        10: {'0': 0, '1': 0},
+        11: {'0': 0, '1': 0}
+    }
+
+
+
+
+    co2_scrubber_as_int = find_co2_scrubber_rating(lines, positions_to_bit_counts)
+    o2_gen_rating_as_int = find_o2_gen_rating(lines, positions_to_bit_counts)
 
     print(co2_scrubber_as_int * o2_gen_rating_as_int)
 
