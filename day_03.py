@@ -65,10 +65,11 @@ def take_where(binary_strings, position, value):
 
     return result
 
-def find_o2_gen_rating(lines, positions_to_bit_counts):
+def find_o2_gen_rating(lines, ):
     o2_gen_rating = None
     o2_results = lines
     for i in range(0, 12):
+        positions_to_bit_counts = build_index_to_bit_count_map(o2_results)
         bit_counts = positions_to_bit_counts[i]
         if bit_counts['0'] == bit_counts['1']:
             more_freq_bit = '1'
@@ -90,11 +91,12 @@ def find_o2_gen_rating(lines, positions_to_bit_counts):
 
     return o2_gen_as_int
 
-def find_co2_scrubber_rating(lines, positions_to_bit_counts):
+def find_co2_scrubber_rating(lines):
 
     co2_scrubber_rating = None
     co2_results = lines
     for i in range(0, 12):
+        positions_to_bit_counts = build_index_to_bit_count_map(co2_results)
         bit_counts = positions_to_bit_counts[i]
         if bit_counts['0'] == bit_counts['1']:
             less_frequent_bit = '0'
