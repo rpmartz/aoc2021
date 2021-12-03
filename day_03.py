@@ -70,7 +70,9 @@ def find_o2_gen_rating(lines, positions_to_bit_counts):
     o2_results = lines
     for i in range(0, 12):
         bit_counts = positions_to_bit_counts[i]
-        if bit_counts['0'] > bit_counts['1']:
+        if bit_counts['0'] == bit_counts['1']:
+            more_freq_bit = '1'
+        elif bit_counts['0'] > bit_counts['1']:
             more_freq_bit = '0'
         else:
             more_freq_bit = '1'
@@ -94,7 +96,9 @@ def find_co2_scrubber_rating(lines, positions_to_bit_counts):
     co2_results = lines
     for i in range(0, 12):
         bit_counts = positions_to_bit_counts[i]
-        if bit_counts['0'] < bit_counts['1']:
+        if bit_counts['0'] == bit_counts['1']:
+            less_frequent_bit = '0'
+        elif bit_counts['0'] < bit_counts['1']:
             less_frequent_bit = '0'
         else:
             less_frequent_bit = '1'
