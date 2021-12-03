@@ -3,8 +3,7 @@ def read_file():
     with open('data/day03.txt', 'r') as f:
         return [line.strip() for line in f.readlines()]
 
-
-if __name__ == '__main__':
+def part_one(lines):
     positions_to_bit_counts = {
         0: {'0': 0, '1': 0},
         1: {'0': 0, '1': 0},
@@ -43,3 +42,10 @@ if __name__ == '__main__':
     print('gamma: %d' % (gamma))
     print('epsilon: %d' % (epsilon))
     print('gamma * epsilon = %d' % (gamma * epsilon))
+
+
+if __name__ == '__main__':
+    lines = read_file()
+    part_one(lines)
+
+    print('\n=== part two ===\n')
