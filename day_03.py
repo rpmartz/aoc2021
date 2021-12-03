@@ -3,7 +3,7 @@ def read_file():
     with open('data/day03.txt', 'r') as f:
         return [line.strip() for line in f.readlines()]
 
-def part_one(lines):
+def build_index_to_bit_count_map(lines):
     positions_to_bit_counts = {
         0: {'0': 0, '1': 0},
         1: {'0': 0, '1': 0},
@@ -26,6 +26,13 @@ def part_one(lines):
             count_for_bit_at_index = bit_count_for_index[bit]
             count_for_bit_at_index += 1
             bit_count_for_index[bit] = count_for_bit_at_index
+
+            positions_to_bit_counts[index] = bit_count_for_index
+
+    return positions_to_bit_counts
+
+def part_one(lines):
+    positions_to_bit_counts = build_index_to_bit_count_map(lines)
 
     result = []
     for bit_count in positions_to_bit_counts.values():
