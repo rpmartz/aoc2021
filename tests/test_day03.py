@@ -1,6 +1,6 @@
 import unittest
 
-from day_03 import find_co2_scrubber_rating, build_index_to_bit_count_map
+from day_03 import find_co2_scrubber_rating, build_index_to_bit_count_map, find_o2_gen_rating
 
 test_input = [
     '00100',
@@ -20,6 +20,11 @@ test_input = [
 class Day3Tests(unittest.TestCase):
 
     def test_co2_scrubber(self):
-        expected = '01010'
+        expected = 10
         actual = find_co2_scrubber_rating(test_input, build_index_to_bit_count_map(test_input))
+        self.assertEqual(expected, actual)
+
+    def test_o2_gen(self):
+        expected = 23
+        actual = find_o2_gen_rating(test_input, build_index_to_bit_count_map(test_input))
         self.assertEqual(expected, actual)

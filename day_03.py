@@ -78,6 +78,7 @@ def find_o2_gen_rating(lines, positions_to_bit_counts):
         o2_results = take_where(o2_results, i, more_freq_bit)
         if len(o2_results) == 1:
             o2_gen_rating = o2_results[0]
+            break
 
     if o2_gen_rating is None:
         raise Exception('Could not find O2 rating')
@@ -88,13 +89,6 @@ def find_o2_gen_rating(lines, positions_to_bit_counts):
     return o2_gen_as_int
 
 def find_co2_scrubber_rating(lines, positions_to_bit_counts):
-    for line in lines:
-        for index, bit in enumerate(line):
-            bit_count_for_index = positions_to_bit_counts[index]
-
-            count_for_bit_at_index = bit_count_for_index[bit]
-            count_for_bit_at_index += 1
-            bit_count_for_index[bit] = count_for_bit_at_index
 
     co2_scrubber_rating = None
     co2_results = lines
@@ -108,6 +102,7 @@ def find_co2_scrubber_rating(lines, positions_to_bit_counts):
         co2_results = take_where(co2_results, i, less_frequent_bit)
         if len(co2_results) == 1:
             co2_scrubber_rating = co2_results[0]
+            break
 
     if co2_scrubber_rating is None:
         raise Exception('Could not find CO2 scrubber rating')
@@ -133,9 +128,6 @@ def part_two(lines):
         10: {'0': 0, '1': 0},
         11: {'0': 0, '1': 0}
     }
-
-
-
 
     co2_scrubber_as_int = find_co2_scrubber_rating(lines, positions_to_bit_counts)
     o2_gen_rating_as_int = find_o2_gen_rating(lines, positions_to_bit_counts)
