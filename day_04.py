@@ -31,7 +31,7 @@ def mark_number_seen(number, boards):
 
 def has_row_bingo(board):
     for row in board:
-        if row[0][1] and row[1][1] and row[2][1] and row[3][1] and row[4][1]:
+        if all([row[0][1], row[1][1], row[2][1], row[3][1], row[4][1]]):
             return True
 
     return False
@@ -39,8 +39,8 @@ def has_row_bingo(board):
 
 def has_column_bingo(board):
     for column in range(0, 5):
-        if board[0][column][1] and board[1][column][1] and board[2][column][1] and board[3][column][1] and \
-            board[4][column][1]:
+        if all(
+            [board[0][column][1], board[1][column][1], board[2][column][1], board[3][column][1], board[4][column][1]]):
             return True
 
     return False
