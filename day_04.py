@@ -17,8 +17,17 @@ def build_boards(lines):
 
     return boards
 
+def mark_number_seen(number, boards):
+    for board in boards:
+        for row in board:
+            for index, box in enumerate(row):
+                if box[0] == number:
+                    row[index] = (number, True)
+
+
 
 lines = read_file()
 bingo_input = lines[0]
 
 boards = build_boards(lines)
+
