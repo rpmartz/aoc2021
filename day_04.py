@@ -1,3 +1,6 @@
+import copy
+
+
 def read_file():
     with open('data/day04.txt', 'r') as f:
         return [line.strip() for line in f.readlines()]
@@ -77,7 +80,6 @@ boards = build_boards(lines)
 
 # part two - find last board to win
 
-import copy
 
 numbers_to_completed_boards = []
 bingoed_boards_indices = set()
