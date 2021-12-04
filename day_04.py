@@ -50,16 +50,28 @@ def has_diagonal_bingo(board):
 def has_bingo(board):
     return has_row_bingo(board) or has_column_bingo(board) or has_diagonal_bingo(board)
 
+def sum_seen_numbers(board):
+    return sum([
+        item[0] for row in board for item in row if item[1]
+    ])
 
 lines = read_file()
-bingo_input = lines[0]
+bingo_input = [int(num.strip()) for num in lines[0].split(',')]
 
 boards = build_boards(lines)
 
 for number in bingo_input:
-    mark_number_seen(int(number), boards)
+    mark_number_seen(number, boards)
 
     for board in boards:
         if has_bingo(board):
             print('Bingo for board on number %s' % number)
-            print(board)
+            unseen_num_sum = sum([
+                item[0] for row in board for item in row if item[1]
+            ])
+
+            print('Sum of unseen numbers on winning board: %s' % unseen_num_sum)
+            print(unseen_num_sum * number)
+            for row in board:
+                print(row)
+            break
