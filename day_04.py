@@ -37,7 +37,7 @@ def has_row_bingo(board):
 def has_column_bingo(board):
     for column in range(0, 5):
         if board[0][column][1] and board[1][column][1] and board[2][column][1] and board[3][column][1] and \
-                board[4][column][1]:
+            board[4][column][1]:
             return True
 
     return False
@@ -46,16 +46,17 @@ def has_column_bingo(board):
 def has_bingo(board):
     return has_row_bingo(board) or has_column_bingo(board)
 
+
 def sum_seen_numbers(board):
     return sum([
         item[0] for row in board for item in row if item[1]
     ])
 
+
 lines = read_file()
 bingo_input = [int(num.strip()) for num in lines[0].split(',')]
 
 boards = build_boards(lines)
-
 
 # for number in bingo_input:
 #     mark_number_seen(number, boards)
@@ -77,6 +78,7 @@ boards = build_boards(lines)
 # part two - find last board to win
 
 import copy
+
 numbers_to_completed_boards = []
 bingoed_boards_indices = set()
 for number in bingo_input:
