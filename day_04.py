@@ -43,12 +43,8 @@ def has_column_bingo(board):
     return False
 
 
-def has_diagonal_bingo(board):
-    return board[0][0][1] and board[1][1][1] and board[2][2][1] and board[3][3][1] and board[4][4][1]
-
-
 def has_bingo(board):
-    return has_row_bingo(board) or has_column_bingo(board) or has_diagonal_bingo(board)
+    return has_row_bingo(board) or has_column_bingo(board)
 
 def sum_seen_numbers(board):
     return sum([
@@ -60,6 +56,7 @@ bingo_input = [int(num.strip()) for num in lines[0].split(',')]
 
 boards = build_boards(lines)
 
+bingo_seen = False
 for number in bingo_input:
     mark_number_seen(number, boards)
 
@@ -67,11 +64,16 @@ for number in bingo_input:
         if has_bingo(board):
             print('Bingo for board on number %s' % number)
             unseen_num_sum = sum([
-                item[0] for row in board for item in row if item[1]
+                item[0] for row in board for item in row if item[1] == False
             ])
 
             print('Sum of unseen numbers on winning board: %s' % unseen_num_sum)
             print(unseen_num_sum * number)
             for row in board:
                 print(row)
+            bingo_seen = True
             break
+
+
+    if bingo_seen:
+        break
