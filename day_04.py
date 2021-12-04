@@ -56,24 +56,43 @@ bingo_input = [int(num.strip()) for num in lines[0].split(',')]
 
 boards = build_boards(lines)
 
-bingo_seen = False
+
+# for number in bingo_input:
+#     mark_number_seen(number, boards)
+#
+#     for board in boards:
+#         if has_bingo(board):
+#             print('Bingo for board on number %s' % number)
+#             unseen_num_sum = sum([
+#                 item[0] for row in board for item in row if item[1] == False
+#             ])
+#
+#             print('Sum of unseen numbers on winning board: %s' % unseen_num_sum)
+#             print(unseen_num_sum * number)
+#             for row in board:
+#                 print(row)
+#             bingo_seen = True
+#             break
+
+# part two - find last board to win
+
+import copy
+numbers_to_completed_boards = []
+bingoed_boards_indices = set()
 for number in bingo_input:
     mark_number_seen(number, boards)
 
-    for board in boards:
-        if has_bingo(board):
-            print('Bingo for board on number %s' % number)
-            unseen_num_sum = sum([
-                item[0] for row in board for item in row if item[1] == False
-            ])
+    for idx, board in enumerate(boards):
+        if has_bingo(board) and idx not in bingoed_boards_indices:
+            numbers_to_completed_boards.append((number, copy.deepcopy(board)))
+            bingoed_boards_indices.add(idx)
 
-            print('Sum of unseen numbers on winning board: %s' % unseen_num_sum)
-            print(unseen_num_sum * number)
-            for row in board:
-                print(row)
-            bingo_seen = True
-            break
+last_pair = numbers_to_completed_boards[-1]
+print('Last board to win would win on  %s' % last_pair[0])
+board = last_pair[1]
+unseen_num_sum = sum([
+    item[0] for row in board for item in row if item[1] == False
+])
 
-
-    if bingo_seen:
-        break
+print('Sum of unseen numbers on winning board: %s' % unseen_num_sum)
+print(unseen_num_sum * last_pair[0])
