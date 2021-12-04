@@ -56,47 +56,61 @@ def sum_seen_numbers(board):
     ])
 
 
-lines = read_file()
-bingo_input = [int(num.strip()) for num in lines[0].split(',')]
+def part_one(boards, bingo_input):
+    bingo_seen = False
+    for number in bingo_input:
+        mark_number_seen(number, boards)
 
-boards = build_boards(lines)
+        for board in boards:
+            if has_bingo(board):
+                print('Bingo for board on number %s' % number)
+                unseen_num_sum = sum([
+                    item[0] for row in board for item in row if item[1] == False
+                ])
 
-# for number in bingo_input:
-#     mark_number_seen(number, boards)
-#
-#     for board in boards:
-#         if has_bingo(board):
-#             print('Bingo for board on number %s' % number)
-#             unseen_num_sum = sum([
-#                 item[0] for row in board for item in row if item[1] == False
-#             ])
-#
-#             print('Sum of unseen numbers on winning board: %s' % unseen_num_sum)
-#             print(unseen_num_sum * number)
-#             for row in board:
-#                 print(row)
-#             bingo_seen = True
-#             break
+                print('Sum of unseen numbers on winning board: %s' % unseen_num_sum)
+                print(unseen_num_sum * number)
+                for row in board:
+                    print(row)
+                bingo_seen = True
+                break
 
-# part two - find last board to win
+        if bingo_seen:
+            break
 
 
-numbers_to_completed_boards = []
-bingoed_boards_indices = set()
-for number in bingo_input:
-    mark_number_seen(number, boards)
+def part_two(boards, bingo_input):
+    # ordered list of tuples: (number_board_got_bingo_on, board)
+    numbers_to_completed_boards = []
 
-    for idx, board in enumerate(boards):
-        if has_bingo(board) and idx not in bingoed_boards_indices:
-            numbers_to_completed_boards.append((number, copy.deepcopy(board)))
-            bingoed_boards_indices.add(idx)
+    # keep track of boards that already have bingo since a board that has a bingo
+    # will have a bingo on subsequent draws of the number
+    bingoed_boards_indices = set()
 
-last_pair = numbers_to_completed_boards[-1]
-print('Last board to win would win on  %s' % last_pair[0])
-board = last_pair[1]
-unseen_num_sum = sum([
-    item[0] for row in board for item in row if item[1] == False
-])
+    for number in bingo_input:
+        mark_number_seen(number, boards)
 
-print('Sum of unseen numbers on winning board: %s' % unseen_num_sum)
-print(unseen_num_sum * last_pair[0])
+        for idx, board in enumerate(boards):
+            if has_bingo(board) and idx not in bingoed_boards_indices:
+                # make deep copy of board state at time it won; subsequent iterations will mark numbers seen
+                # that were not seen at time of bingo
+                numbers_to_completed_boards.append((number, copy.deepcopy(board)))
+                bingoed_boards_indices.add(idx)
+
+    last_pair = numbers_to_completed_boards[-1]
+    print('Last board to win would win on  %s' % last_pair[0])
+    board = last_pair[1]
+    unseen_num_sum = sum([item[0] for row in board for item in row if item[1] == False])
+
+    print('Sum of unseen numbers on winning board: %s' % unseen_num_sum)
+    print('Product of unseen numbers times winning bingo draw: %s' % (unseen_num_sum * last_pair[0]))
+
+
+if __name__ == '__main__':
+    lines = read_file()
+    bingo_input = [int(num.strip()) for num in lines[0].split(',')]
+    boards = build_boards(lines)
+
+    part_one(boards, bingo_input)
+    print('\n=== Part Two ===\n')
+    part_two(boards, bingo_input)
