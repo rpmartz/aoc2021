@@ -11,7 +11,9 @@ def build_boards(lines):
             boards.append(current_board)
             current_board = []
 
-        current_board.append([(int(num), False) for num in line.split(' ') if num != ''])
+        row = [(int(num), False) for num in line.split(' ') if num != '']
+        if row:
+            current_board.append(row)
 
     return boards
 
@@ -20,7 +22,3 @@ lines = read_file()
 bingo_input = lines[0]
 
 boards = build_boards(lines)
-
-
-
-
