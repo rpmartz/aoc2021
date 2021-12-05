@@ -54,18 +54,23 @@ def mark_vertical_line(board, start: Point, end: Point):
     for row in range(range_start, range_end):
         board[row][start.x] = board[row][start.x] + 1
 
+
 def mark_diagonal_line(board, start: Point, end: Point):
     print('Marking diagonal segment from (%s, %s) to (%s, %s)' % (start.x, start.y, end.x, end.y))
 
-    if start.x < end.x and start.y < end.y:
-        i = start.x
-        j = start.y
+    d_x = end.x - start.x
+    d_y = end.y - start.y
 
-        while i < end.x + 1 and j < end.y + 1:
-            print('\tUpdating board[%s][%s]' % (i, j))
-            board[i][j] = board[i][j] + 1
-            i += 1
-            j += 1
+    length = max(abs(d_x), abs(d_y))
+
+    x_direction = int(d_x / length)
+    y_direction = int(d_y / length)
+
+    for i in range(length + 1):
+        x = start.x + i * x_direction
+        y = start.y + i * y_direction
+        board[x][y] = board[x][y] + 1
+
 
 def part_one(lines, board):
     for line in lines:
