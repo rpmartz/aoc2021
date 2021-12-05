@@ -69,7 +69,7 @@ def mark_diagonal_line(board, start: Point, end: Point):
     for i in range(length + 1):
         x = start.x + i * x_direction
         y = start.y + i * y_direction
-        board[x][y] = board[x][y] + 1
+        board[y][x] = board[y][x] + 1
 
 
 def part_one(lines, board):
