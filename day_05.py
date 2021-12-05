@@ -17,23 +17,13 @@ def build_board(rows, columns):
     return board
 
 
-def mark_horizontal_line(board, row, y1, y2):
-    for idx in range(y1, y2 + 1):
-        current_val = board[row][idx]
-        board[row][idx] = current_val + 1
+def mark_horizontal_line(board, row_index, x1, x2):
+    for column in range(x1, x2 + 1):
+        board[row_index][column] = board[row_index][column] + 1
 
-def mark_vertical_line(board, column, x1, x2):
-    for idx in range(x1, x2):
-        current_val = board[idx][column]
-        board[idx][column] = current_val
-
-def mark_segments(x1, y1, x2, y2, board):
-    is_horizontal_line = x1 == x2
-    if is_horizontal_line:
-        mark_horizontal_line(board, x1, y1, y2)
-    else:
-        mark_vertical_line(board, y1, x1, x2)
-
+def mark_vertical_line(board, column_index, y1, y2):
+    for row in range(y1, y2 + 1):
+        board[row][column_index] = board[row][column_index] + 1
 
 if __name__ == '__main__':
     lines = read_file()
@@ -52,8 +42,10 @@ if __name__ == '__main__':
 
         is_horizontal = y1 == y2
         is_vertical = x1 == x2
-        if is_vertical or is_horizontal:
-            mark_segments(x1, y1, x2, y2, board)
+        if is_vertical:
+            mark_vertical_line(board, x1, y1, y2)
+        elif is_horizontal:
+            mark_horizontal_line(board, y1, x1, x2)
         else:
             continue
 
