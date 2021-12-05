@@ -79,7 +79,7 @@ def part_one(lines, board):
             if point > 1:
                 num_points_ge_2 += 1
 
-    print(num_points_ge_2)
+    print('Part One: %s' % num_points_ge_2)
 
 
 if __name__ == '__main__':
