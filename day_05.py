@@ -1,6 +1,12 @@
+from collections import namedtuple
+
+Point = namedtuple("Point", "x y")
+
+
 def read_file():
     with open('data/day05_test.txt', 'r') as f:
         return [line.strip() for line in f.readlines()]
+
 
 def build_board(rows, columns):
     """
@@ -17,13 +23,17 @@ def build_board(rows, columns):
     return board
 
 
-def mark_horizontal_line(board, row_index, x1, x2):
-    for column in range(x1, x2 + 1):
-        board[row_index][column] = board[row_index][column] + 1
+def mark_horizontal_line(board, start: Point, end: Point):
+    assert start.y == end.y
+    for column in range(start.x, start.x + 1):
+        board[start.y][column] = board[start.y][column] + 1
 
-def mark_vertical_line(board, column_index, y1, y2):
-    for row in range(y1, y2 + 1):
-        board[row][column_index] = board[row][column_index] + 1
+
+def mark_vertical_line(board, start: Point, end: Point):
+    assert start.x == end.x
+    for row in range(start.y, end.y + 1):
+        board[row][start.x] = board[row][start.x] + 1
+
 
 if __name__ == '__main__':
     lines = read_file()
@@ -34,18 +44,15 @@ if __name__ == '__main__':
         first_pair = both_coordinate_pairs[0].split(',')
         second_pair = both_coordinate_pairs[1].split(',')
 
-        x1 = int(first_pair[0])
-        y1 = int(first_pair[1])
+        start = Point(int(first_pair[0]), int(first_pair[1]))
+        end = Point(int(second_pair[0]), int(second_pair[1]))
 
-        x2 = int(second_pair[0])
-        y2 = int(second_pair[1])
-
-        is_horizontal = y1 == y2
-        is_vertical = x1 == x2
+        is_horizontal = start.y == end.y
+        is_vertical = start.x == end.x
         if is_vertical:
-            mark_vertical_line(board, x1, y1, y2)
+            mark_vertical_line(board, start, end)
         elif is_horizontal:
-            mark_horizontal_line(board, y1, x1, x2)
+            mark_horizontal_line(board, start, end)
         else:
             continue
 
