@@ -4,7 +4,7 @@ Point = namedtuple("Point", "x y")
 
 
 def read_file():
-    with open('data/day05_test.txt', 'r') as f:
+    with open('data/day05.txt', 'r') as f:
         return [line.strip() for line in f.readlines()]
 
 
@@ -73,12 +73,17 @@ def part_one(lines, board):
         else:
             continue
 
+    num_points_ge_2 = 0
+    for row in board:
+        for point in row:
+            if point > 1:
+                num_points_ge_2 += 1
+
+    print(num_points_ge_2)
+
 
 if __name__ == '__main__':
     lines = read_file()
-    board = build_board(10, 10)
+    board = build_board(1000, 1000)
 
     part_one(lines, board)
-
-    for row in board:
-        print(row)
