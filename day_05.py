@@ -35,10 +35,7 @@ def mark_vertical_line(board, start: Point, end: Point):
         board[row][start.x] = board[row][start.x] + 1
 
 
-if __name__ == '__main__':
-    lines = read_file()
-    board = build_board(10, 10)
-
+def part_one(lines, board):
     for line in lines:
         both_coordinate_pairs = line.split('->')
         first_pair = both_coordinate_pairs[0].split(',')
@@ -55,6 +52,11 @@ if __name__ == '__main__':
             mark_horizontal_line(board, start, end)
         else:
             continue
+
+
+if __name__ == '__main__':
+    lines = read_file()
+    board = build_board(10, 10)
 
     for row in board:
         print(row)
