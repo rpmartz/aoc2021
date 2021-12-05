@@ -54,6 +54,18 @@ def mark_vertical_line(board, start: Point, end: Point):
     for row in range(range_start, range_end):
         board[row][start.x] = board[row][start.x] + 1
 
+def mark_diagonal_line(board, start: Point, end: Point):
+    print('Marking diagonal segment from (%s, %s) to (%s, %s)' % (start.x, start.y, end.x, end.y))
+
+    if start.x < end.x and start.y < end.y:
+        i = start.x
+        j = start.y
+
+        while i < end.x + 1 and j < end.y + 1:
+            print('\tUpdating board[%s][%s]' % (i, j))
+            board[i][j] = board[i][j] + 1
+            i += 1
+            j += 1
 
 def part_one(lines, board):
     for line in lines:
@@ -80,6 +92,33 @@ def part_one(lines, board):
                 num_points_ge_2 += 1
 
     print('Part One: %s' % num_points_ge_2)
+
+
+def part_two(lines, board):
+    for line in lines:
+        both_coordinate_pairs = line.split('->')
+        first_pair = both_coordinate_pairs[0].split(',')
+        second_pair = both_coordinate_pairs[1].split(',')
+
+        start = Point(int(first_pair[0]), int(first_pair[1]))
+        end = Point(int(second_pair[0]), int(second_pair[1]))
+
+        is_horizontal = start.y == end.y
+        is_vertical = start.x == end.x
+        if is_vertical:
+            mark_vertical_line(board, start, end)
+        elif is_horizontal:
+            mark_horizontal_line(board, start, end)
+        else:
+            mark_diagonal_line(board, start, end)
+
+    num_points_ge_2 = 0
+    for row in board:
+        for point in row:
+            if point > 1:
+                num_points_ge_2 += 1
+
+    print('Part Two: %s' % num_points_ge_2)
 
 
 if __name__ == '__main__':
