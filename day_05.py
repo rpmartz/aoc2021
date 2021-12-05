@@ -25,13 +25,17 @@ def build_board(rows, columns):
 
 def mark_horizontal_line(board, start: Point, end: Point):
     assert start.y == end.y
-    for column in range(start.x, start.x + 1):
+    print('Drawing horizontal segment from (%s, %s) to (%s, %s)' % (start.x, start.y, end.x, end.y))
+    for column in range(start.x, end.x + 1):
+        print('Incrementing board[%s][%s]' % (start.y, column))
         board[start.y][column] = board[start.y][column] + 1
 
 
 def mark_vertical_line(board, start: Point, end: Point):
     assert start.x == end.x
+    print('Drawing vertical segment from (%s, %s) to (%s, %s)' % (start.x, start.y, end.x, end.y))
     for row in range(start.y, end.y + 1):
+        print('Incrementing board[%s][%s]' % (row, start.x))
         board[row][start.x] = board[row][start.x] + 1
 
 
