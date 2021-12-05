@@ -25,17 +25,33 @@ def build_board(rows, columns):
 
 def mark_horizontal_line(board, start: Point, end: Point):
     assert start.y == end.y
-    print('Drawing horizontal segment from (%s, %s) to (%s, %s)' % (start.x, start.y, end.x, end.y))
-    for column in range(start.x, end.x + 1):
-        print('\tIncrementing board[%s][%s]' % (start.y, column))
-        board[start.y][column] = board[start.y][column] + 1
+    row_index = start.y
+
+    # may need to swap range start and end to handle pair such as
+    # (9, 4) to (3, 4). Probably could just use range(min(start.x, end.x) + abs(start.x - end.x))
+    # to simplify
+    if start.x < end.x:
+        range_start = start.x
+        range_end = end.x + 1
+    else:
+        range_start = end.x
+        range_end = start.x + 1
+
+    for column in range(range_start, range_end):
+        board[row_index][column] = board[row_index][column] + 1
 
 
 def mark_vertical_line(board, start: Point, end: Point):
     assert start.x == end.x
-    print('Drawing vertical segment from (%s, %s) to (%s, %s)' % (start.x, start.y, end.x, end.y))
-    for row in range(start.y, end.y + 1):
-        print('\tIncrementing board[%s][%s]' % (row, start.x))
+
+    if start.y < end.y:
+        range_start = start.y
+        range_end = end.y + 1
+    else:
+        range_start = end.y
+        range_end = start.y + 1
+
+    for row in range(range_start, range_end):
         board[row][start.x] = board[row][start.x] + 1
 
 
