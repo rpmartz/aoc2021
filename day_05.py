@@ -56,7 +56,6 @@ def mark_vertical_line(board, start: Point, end: Point):
 
 
 def mark_diagonal_line(board, start: Point, end: Point):
-    print('Marking diagonal segment from (%s, %s) to (%s, %s)' % (start.x, start.y, end.x, end.y))
 
     d_x = end.x - start.x
     d_y = end.y - start.y
@@ -131,3 +130,4 @@ if __name__ == '__main__':
     board = build_board(1000, 1000)
 
     part_one(lines, board)
+    part_two(lines, board)
