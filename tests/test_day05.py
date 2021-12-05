@@ -20,39 +20,6 @@ class Day05Tests(TestCase):
         self.assertEqual(board[9][4], 1)
         self.assertEqual(board[9][5], 1)
 
-    def test_diagonal_inputs(self):
-        board = build_board(10, 10)
-        lines = [
-            '8, 0 -> 0, 8',
-            '0, 0 -> 8, 8',
-        ]
-
-        part_two(lines, board)
-        for row in board:
-            print(row)
-
-        # l to r diagonal line starting in top left corner
-        self.assertEqual(board[0][0], 1)
-        self.assertEqual(board[1][1], 1)
-        self.assertEqual(board[2][2], 2)
-        self.assertEqual(board[3][3], 1)
-        self.assertEqual(board[4][4], 3)
-        self.assertEqual(board[5][5], 2)
-        self.assertEqual(board[6][6], 1)
-        self.assertEqual(board[7][7], 1)
-        self.assertEqual(board[8][8], 1)
-
-        # l to r diagonal upward line starting at bottom left corner
-        self.assertEqual(board[8][0], 1)
-        self.assertEqual(board[7][1], 1)
-        self.assertEqual(board[6][2], 1)
-        self.assertEqual(board[5][3], 1)
-        self.assertEqual(board[4][4], 3)
-        self.assertEqual(board[3][5], 2)
-        self.assertEqual(board[2][6], 1)
-        self.assertEqual(board[1][7], 2)
-        self.assertEqual(board[0][8], 1)
-
     def test_part_two_whole_input(self):
         board = build_board(10, 10)
         lines = [
