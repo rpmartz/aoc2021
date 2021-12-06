@@ -37,3 +37,6 @@ def do_part_two():
 if __name__ == '__main__':
     do_part_one()
     do_part_two()
+
+    # Number of times sonar depth reading increased: 1713
+    # 1734 sliding windows have increasing sums
