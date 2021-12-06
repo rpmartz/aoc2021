@@ -1,4 +1,4 @@
-
+from collections import Counter
 
 def process_day(fish_list):
     new_fish = []
@@ -15,12 +15,32 @@ def process_day(fish_list):
 if __name__ == '__main__':
     with open('data/day06.txt', 'r') as f:
         starting_state = f.read()
-        fish = [int(val) for val in starting_state.split(',')]
+        fish_counts = Counter([int(val) for val in starting_state.split(',')])
 
-    for x in range(0, 256):
-        process_day(fish)
+    fish = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    for i in range(0, 8):
+        fish[i] = fish_counts[i]
 
-    print(len(fish))
+    for day in range(0, 256):
+
+        # zeros will hatch today
+        new_fish = fish[0]
+        for i in range(1, len(fish)):
+            # everything else becomes one day closer to hatching
+            fish[i -1] = fish[i]
+
+        # just hatched fish are "eights"
+        fish[8] = new_fish
+
+        # fish that just had babies are "sevens" again
+        fish[6] = fish[6] + new_fish
+
+    print(sum(fish))
+
+
+
+
+
 
 
 
