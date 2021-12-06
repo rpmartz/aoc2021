@@ -5,12 +5,7 @@ def read_file():
 
 def do_part_one():
     lines = read_file()
-    num_increases = 0
-
-    for idx, current_measurement in enumerate(lines):
-        previous_measurement = lines[idx - 1]
-        if current_measurement > previous_measurement:
-            num_increases += 1
+    num_increases = sum(a < b for a, b in zip(lines, lines[1:]))
 
     print('Number of times sonar depth reading increased: %d' % num_increases)
 
