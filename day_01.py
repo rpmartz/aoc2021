@@ -5,31 +5,16 @@ def read_file():
 
 def do_part_one():
     lines = read_file()
-    num_increases = 0
-
-    for idx, current_measurement in enumerate(lines):
-        previous_measurement = lines[idx - 1]
-        if current_measurement > previous_measurement:
-            num_increases += 1
+    num_increases = sum(a < b for a, b in zip(lines, lines[1:]))
 
     print('Number of times sonar depth reading increased: %d' % num_increases)
 
 
 def do_part_two():
     lines = read_file()
-    previous_sum = 1234567899887  # arbitrarily large first value
-    num_increases = 0
 
-    for idx in range(0, len(lines) - 2):
-        a = lines[idx]
-        b = lines[idx + 1]
-        c = lines[idx + 2]
-
-        current_sum = a + b + c
-        if current_sum > previous_sum:
-            num_increases += 1
-
-        previous_sum = current_sum
+    windows = [sum(lines[i:i + 3]) for i in range(len(lines) - 2)]
+    num_increases = sum(a < b for a, b in zip(windows, windows[1:]))
 
     print('%d sliding windows have increasing sums' % num_increases)
 
