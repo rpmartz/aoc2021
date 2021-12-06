@@ -20,3 +20,11 @@ class Day06Test(unittest.TestCase):
 
         process_day(input)
         self.assertEqual([6, 0, 6, 4, 5, 6, 7, 8, 8], input)
+
+    def test_eighty_days(self):
+        input = [3, 4, 3, 1, 2]
+
+        for x in range(0, 80):
+            process_day(input)
+
+        self.assertEqual(5934, len(input))
