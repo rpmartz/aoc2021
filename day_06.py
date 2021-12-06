@@ -36,15 +36,3 @@ if __name__ == '__main__':
         fish[6] = fish[6] + new_fish
 
     print(sum(fish))
-
-
-
-
-
-
-
-
-
-# model each fish as a single number that represents the number of days until it creates a new lanternfish.
-
-
