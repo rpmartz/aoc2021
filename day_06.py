@@ -17,7 +17,7 @@ if __name__ == '__main__':
         starting_state = f.read()
         fish = [int(val) for val in starting_state.split(',')]
 
-    for x in range(0, 80):
+    for x in range(0, 256):
         process_day(fish)
 
     print(len(fish))
