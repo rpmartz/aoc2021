@@ -1,4 +1,5 @@
 import time
+from functools import lru_cache
 
 
 def read_file():
@@ -6,22 +7,17 @@ def read_file():
         return [int(num) for num in f.read().split(',')]
 
 
-COMPUTED_COSTS = {}
-
-
+# program performance ends up being heavily dependent upon having a cache
+# of sufficient size that you minimize recalculation
+@lru_cache(maxsize=2000)
 def total_cost(num_steps):
-    if num_steps in COMPUTED_COSTS:
-        return COMPUTED_COSTS[num_steps]
-    else:
-        cost = 0
-        cost_per_step = 1
-        for i in range(0, num_steps):
-            cost = cost + cost_per_step
-            cost_per_step += 1
+    cost = 0
+    cost_per_step = 1
+    for i in range(0, num_steps):
+        cost = cost + cost_per_step
+        cost_per_step += 1
 
-        COMPUTED_COSTS[num_steps] = cost
-
-        return cost
+    return cost
 
 
 def find_best_alignment(positions, cost_fn):
@@ -48,4 +44,6 @@ if __name__ == '__main__':
 
     print('Average execution time over 3 runs without memoization: 34.4s (previously calculated)')
     print('Execution time with memoization: %s' % "{:.2f}".format(end - start))
+
+    print(total_cost.cache_info())
     print(fuel_cost)
