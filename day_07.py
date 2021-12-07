@@ -1,16 +1,27 @@
+import time
+
+
 def read_file():
     with open('data/day07.txt', 'r') as f:
         return [int(num) for num in f.read().split(',')]
 
 
-def total_cost(num_steps):
-    cost = 0
-    cost_for_step = 1
-    for i in range(0, num_steps):
-        cost = cost + cost_for_step
-        cost_for_step += 1
+COMPUTED_COSTS = {}
 
-    return cost
+
+def total_cost(num_steps):
+    if num_steps in COMPUTED_COSTS:
+        return COMPUTED_COSTS[num_steps]
+    else:
+        cost = 0
+        cost_per_step = 1
+        for i in range(0, num_steps):
+            cost = cost + cost_per_step
+            cost_per_step += 1
+
+        COMPUTED_COSTS[num_steps] = cost
+
+        return cost
 
 
 def find_best_alignment(positions, cost_fn):
@@ -31,5 +42,10 @@ if __name__ == '__main__':
     best_position, fuel_cost = find_best_alignment(starting_positions, lambda x: x)
     print(fuel_cost)
 
-    best_position, fuel_cost = find_best_alignment(starting_positions, total_cost)
+    start = time.perf_counter()
+    _, fuel_cost = find_best_alignment(starting_positions, total_cost)
+    end = time.perf_counter()
+
+    print('Average execution time over 3 runs without memoization: 34.4s (previously calculated)')
+    print('Execution time with memoization: %s' % "{:.2f}".format(end - start))
     print(fuel_cost)
