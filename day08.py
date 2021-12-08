@@ -13,3 +13,37 @@ for line in lines:
             digit_count += 1
 
 print(digit_count)
+
+# If you model each number as a 7 bit base 2 number where a is index 0 and f is index 7
+
+# 0 - 1110111
+# 1 - 0010010
+# 2 - 1011101
+# 3 - 1011010
+# 4 - 0111010
+# 5 - 1101010
+# 6 - 1101111
+# 7 - 1010010
+# 8 - 1111111
+# 9 - 1111011
+
+# then you can look at the unique numbers:
+# 1 - 0010010
+# 4 - 0111010
+# 7 - 1010010
+# 8 - 1111111
+
+# and given the example:
+# 1 - 0010010 ab
+# 4 - 0111010 eafb
+# 7 - 1010010 dab
+# 8 - 1111111 acedgfb
+
+# you can remap the bits to letters where
+# 0 - first letter of 7
+# 1 -
+# 2 - first letter of 1
+# 3 -
+# 4 -
+# 5 - second letter of 1
+# 6 -
