@@ -21,13 +21,13 @@ def find_low_points(board):
             lt_top = (i - 1 < 0) or row[j] < board[i - 1][j]
 
             if all([lt_left, lt_right, lt_top, lt_bottom]):
-                low_points.append(row[j])
+                low_points.append((i, j, row[j]))
 
     return low_points
 
 
 def calculate_risk_level(low_points):
-    return sum(1 + p for p in low_points)
+    return sum(1 + p[2] for p in low_points)
 
 
 def do_part_one():
@@ -38,4 +38,9 @@ def do_part_one():
     print('Pt 1: %s' % risk_level)
 
 
-do_part_one()
+def do_part_two():
+    board = read_board()
+
+
+if __name__ == '__main__':
+    do_part_one()

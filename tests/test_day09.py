@@ -15,9 +15,9 @@ class DayNineTest(unittest.TestCase):
         ]
 
         low_points = find_low_points(board)
-        expected = [1, 0, 5, 5]
+        expected = [(0, 1, 1), (0, 9, 0), (2, 2, 5), (4, 6, 5)]
         self.assertEqual(low_points, expected)
 
     def test_summing_risk_score(self):
-        low_points = [1, 0, 5, 5]
+        low_points = [(0, 1, 1), (0, 9, 0), (2, 2, 5), (4, 6, 5)]
         self.assertEqual(15, calculate_risk_level(low_points))
