@@ -1,3 +1,12 @@
+def read_board():
+    with open('data/day09.txt', 'r') as f:
+        board = []
+        for line in f.readlines():
+            board.append([int(num) for num in line.strip()])
+
+    return board
+
+
 def find_low_points(board):
     board_depth = len(board) - 1
     board_width = len(board[0]) - 1
@@ -19,3 +28,14 @@ def find_low_points(board):
 
 def calculate_risk_level(low_points):
     return sum(1 + p for p in low_points)
+
+
+def do_part_one():
+    board = read_board()
+    low_points = find_low_points(board)
+    risk_level = calculate_risk_level(low_points)
+
+    print('Pt 1: %s' % risk_level)
+
+
+do_part_one()
