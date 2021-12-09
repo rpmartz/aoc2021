@@ -39,11 +39,3 @@ print(digit_count)
 # 7 - 1010010 dab
 # 8 - 1111111 acedgfb
 
-# you can remap the bits to letters where
-# 0 - first letter of 7
-# 1 -
-# 2 - first letter of 1
-# 3 -
-# 4 -
-# 5 - second letter of 1
-# 6 -
