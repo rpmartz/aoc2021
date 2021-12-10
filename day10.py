@@ -27,13 +27,15 @@ def find_corruption(sequence):
     return None
 
 
+def do_part_1(lines):
+    score = 0
+    for line in lines:
+        first_illegal_character = find_corruption(line)
+        if first_illegal_character:
+            score += SCORES[first_illegal_character]
+
+    print(score)
+
+
 with open('data/day10.txt', 'r') as f:
     lines = [line.strip() for line in f.readlines()]
-
-score = 0
-for line in lines:
-    first_illegal_character = find_corruption(line)
-    if first_illegal_character:
-        score += SCORES[first_illegal_character]
-
-print(score)
