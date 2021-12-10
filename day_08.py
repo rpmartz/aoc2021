@@ -1,6 +1,26 @@
 with open('data/day08.txt') as f:
     lines = [line.strip() for line in f.readlines()]
 
+
+def find_unique_length_values(signals):
+    one = None
+    four = None
+    seven = None
+    eight = None
+
+    for s in signals:
+        if len(s) == 2:
+            one = s
+        elif len(s) == 3:
+            seven = s
+        elif len(s) == 4:
+            four = s
+        elif len(s) == 7:
+            eight = s
+
+    return one, four, seven, eight
+
+
 def do_part_one(lines):
     unique_segment_lengths = {2, 3, 4, 7}
 
@@ -15,9 +35,57 @@ def do_part_one(lines):
 
     print(digit_count)
 
+
 def do_part_two(lines):
+    numbers = []
     for line in lines:
         lhs, rhs = line.split('|')
+        both_parts = lhs.split() + rhs.split()
+
+        one, four, seven, eight = find_unique_length_values(both_parts)
+
+        four = set(four)
+        seven = set(seven)
+
+        number = ''
+        for signal in rhs.split():
+            l = len(signal)
+            if l == 2:
+                number += '1'
+            elif l == 3:
+                number += '7'
+            elif l == 4:
+                number += '4'
+            elif l == 5:
+                len_xor_seven = len(seven ^ set(signal))
+                len_xor_four = len(four ^ set(signal))
+                if len_xor_four == 5 and len_xor_seven == 4:
+                    number += '2'
+                elif len_xor_four == 3 and len_xor_seven == 2:
+                    number += '3'
+                elif len_xor_four == 3 and len_xor_seven == 4:
+                    number += '5'
+                else:
+                    raise Exception('Length 5 signal %s unmappable' % signal)
+            elif l == 6:
+                len_xor_seven = len(seven ^ set(signal))
+                len_xor_four = len(four ^ set(signal))
+                if len_xor_four == 2 and len_xor_seven == 3:
+                    number += '9'
+                elif len_xor_four == 4 and len_xor_seven == 5:
+                    number += '6'
+                elif len_xor_four == 4 and len_xor_seven == 3:
+                    number += '0'
+                else:
+                    raise Exception('Length 6 signal %s unmappable' % signal)
+            elif l == 7:
+                number += '8'
+            else:
+                raise Exception('Signal %s unmappable' % signal)
+
+        numbers.append((int(number)))
+
+    print(sum(numbers))
 
 
 do_part_one(lines)
