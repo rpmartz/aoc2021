@@ -64,7 +64,6 @@ def basin_size(x, y, board, seen_points=None):
         for neighbor in neighbors:
             basin_size(neighbor[0], neighbor[1], board, seen_points)
 
-    print(seen_points)
     return len(seen_points)
 
 
@@ -92,6 +91,10 @@ def do_part_two():
     board = read_board()
     low_points = find_low_points(board)
     basins = find_basin_sizes(low_points, board)
+
+    sorted_basins = sorted(basins)
+    product = sorted_basins[-3] * sorted_basins[-2] * sorted_basins[-1]
+    print('Pt 2: %s' % product)
 
 
 if __name__ == '__main__':
