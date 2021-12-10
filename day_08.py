@@ -43,7 +43,31 @@ do_part_two(lines)
 # 8 - 1111111
 
 # and given the example:
+# 0 - 1110111 cagedb
 # 1 - 0010010 ab
+# 2 - 1011101 gcdfa
+# 3 - 1011010 fbcad
 # 4 - 0111010 eafb
+# 5 - 1101010 cdfbe
+# 6 - 1101111 cdfgeb
 # 7 - 1010010 dab
 # 8 - 1111111 acedgfb
+# 9 - 1111011 cefabd
+
+# we need a way to differentiate (acdfg, abcdf, bcdef) from one another
+# and (abcdef, bcdefg, abcdeg) from one another using just ab, abfe, abd, and abcdefg and some setwise operator
+
+five_letters = ['acdfg', 'fbcad', 'cdfbe']
+six_letters = ['cefabd', 'cdfgeb', 'cagedb']
+
+known_values = ['ab', 'abfe', 'abd', 'abcdefg']
+
+for signal in five_letters:
+    print('Signal %s' % signal)
+    s = set(signal)
+    for kv in known_values:
+        kv_set = set(kv)
+        print('\t ^ %s: %s' % (kv, len(s ^ kv_set)))
+
+# xor with 8 produces length 2 for all so it's not a differentiator
+# xor with 7 and 4 with signal of length 5 produces a combo of resulting set lengths (5, 4), (3, 2), and (3, 4)
