@@ -25,3 +25,8 @@ class DayTenTests(unittest.TestCase):
         line = '<{([([[(<>()){}]>(<<{{'
         c = find_corruption(line)
         self.assertEqual(c, '>')
+
+    def test_find_completion(self):
+        line = '[({(<(())[]>[[{[]{<()<>>'
+        completion = find_completion(line)
+        self.assertEqual(completion, '}}]])})]')
