@@ -1,11 +1,3 @@
-SCORES = {
-    ')': 3,
-    ']': 57,
-    '}': 1197,
-    '>': 25137
-}
-
-
 def find_corruption(sequence):
     openers = {'{', '(', '[', '<'}
     closers = {'}', ')', ']', '>'}
@@ -28,11 +20,18 @@ def find_corruption(sequence):
 
 
 def do_part_1(lines):
+    scores = {
+        ')': 3,
+        ']': 57,
+        '}': 1197,
+        '>': 25137
+    }
+
     score = 0
     for line in lines:
         first_illegal_character = find_corruption(line)
         if first_illegal_character:
-            score += SCORES[first_illegal_character]
+            score += scores[first_illegal_character]
 
     print(score)
 
