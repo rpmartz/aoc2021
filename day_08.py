@@ -8,15 +8,15 @@ def find_unique_length_values(signals):
     seven = None
     eight = None
 
-    for s in signals:
-        if len(s) == 2:
-            one = s
-        elif len(s) == 3:
-            seven = s
-        elif len(s) == 4:
-            four = s
-        elif len(s) == 7:
-            eight = s
+    for signal in signals:
+        if len(signal) == 2:
+            one = signal
+        elif len(signal) == 3:
+            seven = signal
+        elif len(signal) == 4:
+            four = signal
+        elif len(signal) == 7:
+            eight = signal
 
     return one, four, seven, eight
 
@@ -49,14 +49,14 @@ def do_part_two(lines):
 
         number = ''
         for signal in rhs.split():
-            l = len(signal)
-            if l == 2:
+            length_of_signal = len(signal)
+            if length_of_signal == 2:
                 number += '1'
-            elif l == 3:
+            elif length_of_signal == 3:
                 number += '7'
-            elif l == 4:
+            elif length_of_signal == 4:
                 number += '4'
-            elif l == 5:
+            elif length_of_signal == 5:
                 len_xor_seven = len(seven ^ set(signal))
                 len_xor_four = len(four ^ set(signal))
                 if len_xor_four == 5 and len_xor_seven == 4:
@@ -67,7 +67,7 @@ def do_part_two(lines):
                     number += '5'
                 else:
                     raise Exception('Length 5 signal %s unmappable' % signal)
-            elif l == 6:
+            elif length_of_signal == 6:
                 len_xor_seven = len(seven ^ set(signal))
                 len_xor_four = len(four ^ set(signal))
                 if len_xor_four == 2 and len_xor_seven == 3:
@@ -78,7 +78,7 @@ def do_part_two(lines):
                     number += '0'
                 else:
                     raise Exception('Length 6 signal %s unmappable' % signal)
-            elif l == 7:
+            elif length_of_signal == 7:
                 number += '8'
             else:
                 raise Exception('Signal %s unmappable' % signal)
