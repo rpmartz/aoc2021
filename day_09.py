@@ -37,19 +37,19 @@ def get_coordinates_of_neighbors(x, y, board):
     neighbors = []
 
     # left neighbor
-    if x > 0:
-        neighbors.append((x - 1, y))
-
-    # right
-    if x + 1 < len(board[0]) - 1:
-        neighbors.append((x + 1, y))
-
-    # top
     if y > 0:
         neighbors.append((x, y - 1))
-    # bottom
-    if y + 1 < len(board) - 1:
+
+    # right
+    if y + 1 < len(board[0]) - 1:
         neighbors.append((x, y + 1))
+
+    # top
+    if x > 0:
+        neighbors.append((x - 1, y))
+    # bottom
+    if x + 1 < len(board) - 1:
+        neighbors.append((x + 1, y))
 
     return neighbors
 
@@ -62,6 +62,7 @@ def basin_size(x, y, board, seen_points=None):
         seen_points.add((x, y))
         neighbors = get_coordinates_of_neighbors(x, y, board)
         for neighbor in neighbors:
+            print('x: %s y:  %s new point: (%s, %s)' % (x, y, neighbor[0], neighbor[1]))
             basin_size(neighbor[0], neighbor[1], board, seen_points)
 
     return len(seen_points)
