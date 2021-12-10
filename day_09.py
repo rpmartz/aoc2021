@@ -54,9 +54,29 @@ def get_coordinates_of_neighbors(x, y, board):
     return neighbors
 
 
+def basin_size(x, y, board, seen_points=None):
+    if seen_points is None:
+        seen_points = set()
+
+    if (x, y) not in seen_points and board[x][y] != 9:
+        seen_points.add((x, y))
+        neighbors = get_coordinates_of_neighbors(x, y, board)
+        for neighbor in neighbors:
+            basin_size(neighbor[0], neighbor[1], board, seen_points)
+
+    return len(seen_points)
+
+
 def find_basin_sizes(low_points, board) -> List[int]:
+    basin_sizes = []
+
     for point in low_points:
         x, y = point[0], point[1]
+
+        current_basin_size = basin_size(x, y, board)
+        basin_sizes.append(current_basin_size)
+
+    return basin_sizes
 
 
 def do_part_one():

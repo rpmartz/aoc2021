@@ -41,6 +41,6 @@ class DayNineTest(unittest.TestCase):
     def test_finding_basins(self):
         low_points = find_low_points(board)
         expected = [3, 9, 14, 9]
-        actual = find_basin_sizes(low_points)
+        actual = find_basin_sizes(low_points, board)
 
         self.assertEqual(expected, actual)
