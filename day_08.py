@@ -62,12 +62,13 @@ six_letters = ['cefabd', 'cdfgeb', 'cagedb']
 
 known_values = ['ab', 'abfe', 'abd', 'abcdefg']
 
-for signal in five_letters:
+for signal in six_letters:
     print('Signal %s' % signal)
     s = set(signal)
     for kv in known_values:
         kv_set = set(kv)
         print('\t ^ %s: %s' % (kv, len(s ^ kv_set)))
 
-# xor with 8 produces length 2 for all so it's not a differentiator
-# xor with 7 and 4 with signal of length 5 produces a combo of resulting set lengths (5, 4), (3, 2), and (3, 4)
+# for 5 signal values xor with 8 produces length 2 for all so it's not a differentiator
+# for 5 signal values xor with 7 and 4 produces a combo of resulting set lengths (5, 4), (3, 2), and (3, 4)
+# for 6 signal values xor with 7 and 4 produces a combo of resulting set lengths (2, 3), (4, 5), and (4, 3)
