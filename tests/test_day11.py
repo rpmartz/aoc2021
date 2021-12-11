@@ -87,3 +87,17 @@ class DayEleven(unittest.TestCase):
 
         expected = {(9, 2), (9, 4), (8, 2), (8, 3), (8, 4)}
         self.assertEqual(expected, neighbors)
+
+    def test_get_neighbors_left_middle(self):
+        neighbors = get_neighbors(board, 3, 0)
+        self.assertEqual(len(neighbors), 5)
+
+        expected = {(2, 0), (2, 1), (3, 1), (4, 0), (4, 1)}
+        self.assertEqual(expected, neighbors)
+
+    def test_get_neighbors_right_middle(self):
+        neighbors = get_neighbors(board, 3, 9)
+        self.assertEqual(len(neighbors), 5)
+
+        expected = {(2, 9), (2, 8), (3, 8), (4, 8), (4, 9)}
+        self.assertEqual(expected, neighbors)
