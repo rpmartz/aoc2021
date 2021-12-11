@@ -1,5 +1,6 @@
-from day_11 import *
 import unittest
+
+from day_11 import *
 
 
 class DayEleven(unittest.TestCase):
@@ -22,3 +23,16 @@ class DayEleven(unittest.TestCase):
         actual = count_num_flashes(board, 100)
 
         self.assertEqual(expected, actual)
+
+    def test_sub_example(self):
+        board = [
+            [1, 1, 1, 1, 1],
+            [1, 9, 9, 9, 1],
+            [1, 9, 1, 9, 1],
+            [1, 9, 9, 9, 1],
+            [1, 1, 1, 1, 1]
+        ]
+
+        count_num_flashes(board, 1)
+        for row in board:
+            print(row)
