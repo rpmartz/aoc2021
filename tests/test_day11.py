@@ -18,6 +18,9 @@ board = [
 class DayEleven(unittest.TestCase):
 
     def test_example(self):
+        expected_after_10 = 204
+        actual_after_10 = count_num_flashes(board, 10)
+        self.assertEqual(expected_after_10, actual_after_10)
 
         expected = 1656
         actual = count_num_flashes(board, 100)
@@ -33,9 +36,8 @@ class DayEleven(unittest.TestCase):
             [1, 1, 1, 1, 1]
         ]
 
-        count_num_flashes(subsample_board, 1)
-        for row in subsample_board:
-            print(row)
+        flashes = count_num_flashes(subsample_board, 2)
+        self.assertEqual(9, flashes)
 
     def test_get_neighbors_upper_left(self):
         neighbors = get_neighbors(board, 0, 0)

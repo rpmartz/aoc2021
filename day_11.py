@@ -1,4 +1,5 @@
 def count_num_flashes(board, iteration):
+    total_flashes = 0
     for step in range(iteration):
 
         flashed_this_step = set()
@@ -8,9 +9,12 @@ def count_num_flashes(board, iteration):
                 if element < 9:
                     board[i][j] = board[i][j] + 1
                 # if element has flashed, increment neighbors by one
-                elif element == 9:
+                else:
                     process_flash(board, i, j, flashed_this_step)
                     board[i][j] = 0
+        total_flashes += len(flashed_this_step)
+
+    return total_flashes
 
 
 def process_flash(board, i, j, already_flashed):
@@ -23,8 +27,6 @@ def process_flash(board, i, j, already_flashed):
             already_flashed.add(neighbor)
             board[x][y] = 0
             process_flash(board, x, y, already_flashed)
-        else:
-            raise Exception('Should not reach this point during recursion')
 
 
 def get_neighbors(board, i, j):
