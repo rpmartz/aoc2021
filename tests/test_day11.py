@@ -24,10 +24,6 @@ def get_board():
 class DayEleven(unittest.TestCase):
 
     def test_example(self):
-        expected_after_2 = 34
-        actual_after_2 = count_num_flashes(get_board(), 2)
-        self.assertEqual(expected_after_2, actual_after_2)
-
         expected_after_10 = 204
         actual_after_10 = count_num_flashes(get_board(), 10)
         self.assertEqual(expected_after_10, actual_after_10)
