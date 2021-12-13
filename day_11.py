@@ -45,3 +45,20 @@ def get_neighbors(i, j):
             neighbors.add((i + x_offset, j + y_offset))
 
     return neighbors
+
+
+def get_board():
+    with open('data/day11.txt', 'r') as file:
+        board = []
+        for line in file.readlines():
+            row = []
+            for char in line.strip():
+                row.append(int(char))
+            board.append(row)
+
+        return board
+
+
+if __name__ == '__main__':
+    board = get_board()
+    print(count_num_flashes(board, 100))
