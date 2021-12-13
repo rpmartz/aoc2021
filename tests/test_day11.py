@@ -49,65 +49,13 @@ class DayEleven(unittest.TestCase):
         flashes = count_num_flashes(subsample_board, 2)
         self.assertEqual(9, flashes)
 
-    def test_get_neighbors_upper_left(self):
-        neighbors = get_neighbors(get_board(), 0, 0)
-        self.assertEqual(len(neighbors), 3)
+    def test_get_neighbors(self):
+        i = 4
+        j = 5
 
-        expected = {(0, 1), (1, 0), (1, 1)}
-        self.assertEqual(expected, neighbors)
-
-    def test_get_neighbors_upper_right(self):
-        neighbors = get_neighbors(get_board(), 0, 9)
-        self.assertEqual(len(neighbors), 3)
-
-        expected = {(0, 8), (1, 8), (1, 9)}
-        self.assertEqual(expected, neighbors)
-
-    def test_get_neighbors_lower_left(self):
-        neighbors = get_neighbors(get_board(), 9, 0)
-        self.assertEqual(len(neighbors), 3)
-
-        expected = {(9, 1), (8, 0), (8, 1)}
-        self.assertEqual(expected, neighbors)
-
-    def test_get_neighbors_lower_right(self):
-        neighbors = get_neighbors(get_board(), 9, 9)
-        self.assertEqual(len(neighbors), 3)
-
-        expected = {(9, 8), (8, 8), (8, 9)}
-        self.assertEqual(expected, neighbors)
-
-    def test_get_neighbors_middle(self):
-        neighbors = get_neighbors(get_board(), 2, 3)
-        self.assertEqual(len(neighbors), 8)
-
-        expected = {(1, 2), (1, 3), (1, 4), (2, 2), (2, 4), (3, 2), (3, 3), (3, 4)}
-        self.assertEqual(expected, neighbors)
-
-    def test_get_neighbors_top_middle(self):
-        neighbors = get_neighbors(get_board(), 0, 3)
-        self.assertEqual(len(neighbors), 5)
-
-        expected = {(0, 2), (0, 4), (1, 2), (1, 3), (1, 4)}
-        self.assertEqual(expected, neighbors)
-
-    def test_get_neighbors_bottom_middle(self):
-        neighbors = get_neighbors(get_board(), 9, 3)
-        self.assertEqual(len(neighbors), 5)
-
-        expected = {(9, 2), (9, 4), (8, 2), (8, 3), (8, 4)}
-        self.assertEqual(expected, neighbors)
-
-    def test_get_neighbors_left_middle(self):
-        neighbors = get_neighbors(get_board(), 3, 0)
-        self.assertEqual(len(neighbors), 5)
-
-        expected = {(2, 0), (2, 1), (3, 1), (4, 0), (4, 1)}
-        self.assertEqual(expected, neighbors)
-
-    def test_get_neighbors_right_middle(self):
-        neighbors = get_neighbors(get_board(), 3, 9)
-        self.assertEqual(len(neighbors), 5)
-
-        expected = {(2, 9), (2, 8), (3, 8), (4, 8), (4, 9)}
-        self.assertEqual(expected, neighbors)
+        expected = {
+            (3, 5), (5, 5), (4, 4), (4, 6), (3, 4), (3, 6),
+            (5, 4), (5, 6)
+        }
+        actual = get_neighbors(i, j)
+        self.assertEqual(expected, actual)
