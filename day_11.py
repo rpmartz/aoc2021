@@ -1,4 +1,4 @@
-def count_num_flashes(board, iteration):
+def count_num_flashes(board):
     total_flashes = 0
 
     coord_grid = {}
@@ -6,7 +6,9 @@ def count_num_flashes(board, iteration):
         for j, value in enumerate(row):
             coord_grid[(i, j)] = value
 
-    for _ in range(iteration):
+    num_steps = 0
+    while True:
+        num_steps += 1
         flashes_for_step = []
 
         for point, value in coord_grid.items():
@@ -32,7 +34,10 @@ def count_num_flashes(board, iteration):
                     if coord_grid[neighbor] > 9:
                         flashes_for_step.append(neighbor)
 
-    return total_flashes
+        if all(value == 0 for value in coord_grid.values()):
+            break
+
+    return num_steps
 
 
 def get_neighbors(i, j):
@@ -61,4 +66,4 @@ def get_board():
 
 if __name__ == '__main__':
     board = get_board()
-    print(count_num_flashes(board, 100))
+    print(count_num_flashes(board))
