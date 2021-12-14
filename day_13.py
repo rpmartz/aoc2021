@@ -22,6 +22,19 @@ if __name__ == '__main__':
     points = read_points()
     folds = read_folds()
 
-    first_fold = folds[0]
-    points = process_fold(points, first_fold)
-    print(len(points))
+    for fold in folds:
+        points = process_fold(points, fold)
+
+    lines = []
+
+    max_x = max(x for x, _ in points)
+    max_y = max(y for _, y in points)
+
+    for y in range(max_y + 1):
+        for x in range(max_x + 1):
+            if (x, y) in points:
+                print('o', end='')
+            else:
+                print(' ', end='')
+
+        print('')
