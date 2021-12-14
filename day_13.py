@@ -27,7 +27,7 @@ def process_fold(points, fold):
         elif axis == 'y':
             # fold bottom half up
             if p_y > value:
-                distance = value - p_x
+                distance = value - p_y
                 new_point = (p_x, -2 * distance)
                 points_after_fold.add(new_point)
             else:
