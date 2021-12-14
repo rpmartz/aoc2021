@@ -9,33 +9,13 @@ def read_folds():
 
 
 def process_fold(points, fold):
-    points_after_fold = set()
-
     axis, value = fold
-    for idx, point in enumerate(points):
-        p_x, p_y = point
-        if axis == 'x':
-            # fold right half left
-            if p_x > value:
-                # x value of point shifts twice distance from p_x to value
-                distance = value - p_x
-                new_point = (-2 * distance, p_y)
-                points_after_fold.add(new_point)
-            else:
-                points_after_fold.add(point)
-
-        elif axis == 'y':
-            # fold bottom half up
-            if p_y > value:
-                distance = value - p_y
-                new_point = (p_x, -2 * distance)
-                points_after_fold.add(new_point)
-            else:
-                points_after_fold.add(point)
-        else:
-            raise Exception('Do not know how to handle %s' % fold)
-
-    return points_after_fold
+    if axis == 'x':
+        return {(x, y) if x <= value else (2 * value - x, y)
+                for (x, y) in points}
+    else:
+        return {(x, y) if y <= value else (x, 2 * value - y)
+                for (x, y) in points}
 
 
 if __name__ == '__main__':
