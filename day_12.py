@@ -39,17 +39,21 @@ def calculate_paths(input):
         paths[destination].add(source)
 
     all_paths = set()
-    nodes_to_process = [('start',)]
+    nodes_to_process = [(('start',), False)]
     while nodes_to_process:
-        path = nodes_to_process.pop()
+        path, small_cave_visited_twice = nodes_to_process.pop()
 
         if path[-1] == 'end':
             all_paths.add(path)
             continue
 
-        for cand in paths[path[-1]]:  # get all of the nodes that the last node in the current path has a connection to
-            if not cand.islower() or cand not in path:
-                nodes_to_process.append((*path, cand))
+        for node in paths[path[-1]]:  # get all of the nodes that the last node in the current path has a connection to
+            if node == 'start':
+                continue
+            elif node.isupper() or node not in path:
+                nodes_to_process.append(((*path, node), small_cave_visited_twice))
+            elif not small_cave_visited_twice and path.count(node) == 1:
+                nodes_to_process.append(((*path, node), True))
 
     return len(all_paths)
 
