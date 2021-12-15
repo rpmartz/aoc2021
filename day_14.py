@@ -43,4 +43,11 @@ def quantify(polymer):
 
 
 if __name__ == '__main__':
-    pass
+
+    rules = parse_rules(read_rules())
+
+    polymer = problem_start_template
+    for i in range(10):
+        polymer = process(polymer, rules)
+
+    print(f'Part 1: {quantify(polymer)}')
