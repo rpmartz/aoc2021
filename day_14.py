@@ -29,10 +29,7 @@ def process(template, rules: dict):
         if pair in rules:
             new_polymer += rules[pair]
 
-        if i == len(characters[1:]) - 1:
-            new_polymer += second
-
-    return new_polymer
+    return new_polymer + template[-1]  # append last character of original polymer
 
 
 def quantify(polymer):
