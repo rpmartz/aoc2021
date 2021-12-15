@@ -28,7 +28,9 @@ def process(template, rules: dict):
         new_polymer += first
         if pair in rules:
             new_polymer += rules[pair]
-        new_polymer += second
+
+        if i == len(characters[1:]) - 1:
+            new_polymer += second
 
     return new_polymer
 
