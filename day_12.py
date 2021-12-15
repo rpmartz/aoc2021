@@ -42,7 +42,6 @@ def calculate_paths(input):
     nodes_to_process = [('start',)]
     while nodes_to_process:
         path = nodes_to_process.pop()
-        print(f'Popped {path} off nodes_to_process')
 
         if path[-1] == 'end':
             print(f'\tadding {path} to all_paths because it ends with `end`')
@@ -50,9 +49,7 @@ def calculate_paths(input):
             continue
 
         for cand in paths[path[-1]]:  # get all of the nodes that the last node in the current path has a connection to
-            print(f'\t\tchecking {cand}')
             if not cand.islower() or cand not in path:
-                print(f'\t\t\tappending {(*path, cand)} to nodes_to_process')
                 nodes_to_process.append((*path, cand))
 
     return len(all_paths)
