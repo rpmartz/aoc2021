@@ -2,7 +2,7 @@ import unittest
 
 from day_14 import *
 
-rules = """\
+rules = parse_rules("""\
 CH -> B
 HH -> N
 CB -> H
@@ -19,7 +19,7 @@ BB -> N
 BC -> B
 CC -> N
 CN -> C
-"""
+""")
 
 
 class DayFourteenTests(unittest.TestCase):

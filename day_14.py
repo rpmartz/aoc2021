@@ -8,8 +8,29 @@ def read_rules():
         return f.read()
 
 
-def process(template, rules):
-    pass
+def parse_rules(rules: str):
+    pair_mappings = {}
+    for pairing in rules.splitlines():
+        lhs, rhs = pairing.split('->')
+        pair_mappings[lhs.strip()] = rhs.strip()
+
+    return pair_mappings
+
+
+def process(template, rules: dict):
+    characters = [c for c in template]
+    new_polymer = ''
+    for i, _ in enumerate(characters[1:]):
+        first = template[i]
+        second = template[i + 1]
+
+        pair = first + second
+        new_polymer += first
+        if pair in rules:
+            new_polymer += rules[pair]
+        new_polymer += second
+
+    return new_polymer
 
 
 def quantify(polymer):
