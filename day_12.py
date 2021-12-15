@@ -44,7 +44,6 @@ def calculate_paths(input):
         path = nodes_to_process.pop()
 
         if path[-1] == 'end':
-            print(f'\tadding {path} to all_paths because it ends with `end`')
             all_paths.add(path)
             continue
 
