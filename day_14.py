@@ -22,8 +22,6 @@ def process(pair_counts, rules: dict):
     updated_counts = copy.deepcopy(pair_counts)
     for pair in pair_counts.keys():
         new_char = rules[pair]
-        if not new_char:
-            raise Exception(f'Could not find value for {pair}')
 
         # new pair one = first + new_char
         updated_counts[pair[0] + new_char] += 1
