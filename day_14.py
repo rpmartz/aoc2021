@@ -1,4 +1,3 @@
-import copy
 from collections import Counter
 
 problem_start_template = 'OFSNKKHCBSNKBKFFCVNB'
@@ -19,14 +18,14 @@ def parse_rules(rules: str):
 
 
 def process(pair_counts, rules: dict):
-    updated_counts = copy.deepcopy(pair_counts)
-    for pair in pair_counts.keys():
+    updated_counts = Counter()
+    for pair, count in pair_counts.items():
         new_char = rules[pair]
 
         # new pair one = first + new_char
-        updated_counts[pair[0] + new_char] += 1
+        updated_counts[pair[0] + new_char] += count
         # new pair two = new_char + second
-        updated_counts[new_char + pair[1]] += 1
+        updated_counts[new_char + pair[1]] += count
 
     return updated_counts
 
