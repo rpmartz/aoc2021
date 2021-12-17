@@ -7,12 +7,20 @@ def build_target_grid(x_open, x_close, y_open, y_close):
     return grid
 
 
+def process_step(x, y):
+    if x == 0:
+        d_x = 0
+    elif x > 0:
+        d_x = -1
+    else:
+        d_x = 1
+
+    new_x = x + d_x
+    new_y = y - 1
+    return (new_x, new_y)
+
+
 if __name__ == '__main__':
     target_grid = build_target_grid(150, 171, -70, -129)
 
-    if (150, -70) not in target_grid:
-        print('expected 150, -70')
-    elif (171, -129) not in target_grid:
-        print('expected 171, -129')
-    elif (160, -100) not in target_grid:
-        print('expected 160, -100')
+    point =
