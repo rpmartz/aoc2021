@@ -6,6 +6,10 @@ def read_file():
         return f.read()
 
 
+def calculate_min_risk(grid) -> int:
+    return -2
+
+
 if __name__ == '__main__':
     grid = read_numeric_grid(read_file())
     print(grid)
