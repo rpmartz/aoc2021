@@ -1,4 +1,7 @@
 import unittest
+from day_15 import *
+
+test_board = """\
 
 from aocutils import read_numeric_grid
 from day_15 import calculate_min_risk
