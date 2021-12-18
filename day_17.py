@@ -23,5 +23,6 @@ def process_step(x, y):
 if __name__ == '__main__':
     target_grid = build_target_grid(150, 171, -70, -129)
 
-    if (171, -129) not in target_grid:
+    corners = {(150, -70), (150, -129), (171, -129), (171, -129)}
+    if not all([point in target_grid for point in corners]):
         print('Check bounds')
