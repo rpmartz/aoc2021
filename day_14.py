@@ -17,37 +17,47 @@ def parse_rules(rules: str):
     return pair_mappings
 
 
-def process(template, rules: dict):
-    characters = [c for c in template]
-    new_polymer = ''
-    for i, _ in enumerate(characters[1:]):
-        first = template[i]
-        second = template[i + 1]
+def process(pair_counts, rules: dict):
+    updated_counts = Counter()
+    for pair, count in pair_counts.items():
+        new_char = rules[pair]
 
-        pair = first + second
-        new_polymer += first
-        if pair in rules:
-            new_polymer += rules[pair]
+        # new pair one = first + new_char
+        updated_counts[pair[0] + new_char] += count
+        # new pair two = new_char + second
+        updated_counts[new_char + pair[1]] += count
 
-        if i == len(characters[1:]) - 1:
-            new_polymer += second
-
-    return new_polymer
+    return updated_counts
 
 
-def quantify(polymer):
+# this needs to take in a counter and then calculate frequencies
+def quantify(pair_counts: Counter):
+    digit_counts = Counter()
+
+    for pair, count in pair_counts.items():
+        digit_counts[pair[0]] += count
+        digit_counts[pair[1]] += count
+
+    # every letter is counted twice except for the first and the last, so add one to
+    return (max(digit_counts.values()) - min(digit_counts.values())) // 2 + 1
+
+
+def pairs(polymer_string: str) -> Counter:
     counter = Counter()
-    counter.update([c for c in polymer])
+    for a, b in zip(polymer_string, polymer_string[1:]):
+        counter[a + b] += 1
 
-    return max(counter.values()) - min(counter.values())
+    return counter
 
 
 if __name__ == '__main__':
 
     rules = parse_rules(read_rules())
 
-    polymer = problem_start_template
-    for i in range(10):
-        polymer = process(polymer, rules)
+    pair_counts = pairs(problem_start_template)
+    for i in range(40):
+        pair_counts = process(pair_counts, rules)
+        if i == 9:
+            print(f'Part 1: {quantify(pair_counts)}')
 
-    print(f'Part 1: {quantify(polymer)}')
+    print(f'Part 2: {quantify(pair_counts)}')
