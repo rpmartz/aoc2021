@@ -1,3 +1,12 @@
+class Packet:
+
+    def __init__(self, version, type_id, literal_value=None, children=None):
+        self.version = version
+        self.type_id = type_id
+        self.literal_value = literal_value
+        self.children = children or []
+
+
 def hex_to_bin(hex_string):
     hex_to_bin = {"0": "0000",
                   "1": "0001",
