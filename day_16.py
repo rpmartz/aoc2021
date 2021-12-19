@@ -60,3 +60,10 @@ def hex_to_bin(hex_string):
         bits.append(hex_to_bin[hex_val])
 
     return ''.join(bits)
+
+
+def get_packet_version(hex_packet) -> int:
+    binary_str = hex_to_bin(hex_packet)
+    first_three = binary_str[0:3]
+
+    return int(first_three, 2)
