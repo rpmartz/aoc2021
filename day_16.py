@@ -77,24 +77,49 @@ def get_packet_type(binary_str) -> int:
 def parse_string(hex_string):
     binary_str = hex_to_bin(hex_string)
 
+    packets = []
+
     pc = 0
     while pc < len(binary_str):
 
         # parse version
-        version_bits = binary_str[pc] + binary_str[pc + 3]
+        version_bits = binary_str[pc:pc + 3]
         packet_version = int(version_bits, 2)
         pc += 3
 
         # parse type
-        type_bits = binary_str[pc] + binary_str[pc + 3]
+        type_bits = binary_str[pc:pc + 3]
         packet_type = int(type_bits, 2)
         pc += 3
 
         if packet_type == 4:
-            # todo parse literal
-            pass
+            literal_str = ''
+
+            while True:
+                next_bit = binary_str[pc]
+                pc += 1
+
+                literal_bits = binary_str[pc:pc + 4]
+                literal_str += literal_bits
+                pc += 4
+
+                if int(next_bit) == 0:
+                    packets.append({
+                        'version': packet_version,
+                        'type': packet_type,
+                        'literal_value': int(literal_str, 2)
+                    })
+
+                    # read rest of padding
+                    while pc % 4 != 0:
+                        pc += 1
+
+                    break
+
         elif packet_type in (0, 1, 2, 3, 5, 6, 7):
             # todo parse operator
             pass
         else:
             raise Exception('Parsed unexpected packet type')
+
+    return packets

@@ -38,3 +38,15 @@ class DaySixteen(unittest.TestCase):
         expected_type = 6
         actual = get_packet_type(hex_to_bin(hex))
         self.assertEqual(expected_type, actual)
+
+    def test_parsing_full_string(self):
+        hex = 'D2FE28'
+
+        packets = parse_string(hex)
+        self.assertEqual(1, len(packets))
+
+        packet = packets[0]
+
+        self.assertEqual(packet['type'], 4)
+        self.assertEqual(packet['version'], 6)
+        self.assertEqual(packet['literal_value'], 2021)
