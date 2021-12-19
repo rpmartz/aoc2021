@@ -74,6 +74,28 @@ def get_packet_type(binary_str) -> int:
     return int(version_bits, 2)
 
 
+def parse_literal(binary_str, pc) -> (int, int):
+    literal_str = ''
+
+    while True:
+        next_bit = binary_str[pc]
+        pc += 1
+
+        literal_bits = binary_str[pc:pc + 4]
+        literal_str += literal_bits
+        pc += 4
+
+        if int(next_bit) == 0:
+
+            # read rest of padding
+            while pc % 4 != 0:
+                pc += 1
+
+            break
+
+    return int(literal_str, 2), pc
+
+
 def parse_string(hex_string):
     binary_str = hex_to_bin(hex_string)
 
@@ -93,31 +115,20 @@ def parse_string(hex_string):
         pc += 3
 
         if packet_type == 4:
-            literal_str = ''
-
-            while True:
-                next_bit = binary_str[pc]
-                pc += 1
-
-                literal_bits = binary_str[pc:pc + 4]
-                literal_str += literal_bits
-                pc += 4
-
-                if int(next_bit) == 0:
-                    packets.append({
-                        'version': packet_version,
-                        'type': packet_type,
-                        'literal_value': int(literal_str, 2)
-                    })
-
-                    # read rest of padding
-                    while pc % 4 != 0:
-                        pc += 1
-
-                    break
+            literal_value, pc = parse_literal(binary_str, pc)
+            packets.append({
+                'version': packet_version,
+                'type': packet_type,
+                'literal_value': literal_value
+            })
 
         elif packet_type in (0, 1, 2, 3, 5, 6, 7):
-            # todo parse operator
+            # length_type_bit = int(binary_str[pc])
+            # pc += 1
+            #
+            # if length_type_bit == 0:
+            #     pass
+            # elif length_type_bit == 1:
             pass
         else:
             raise Exception('Parsed unexpected packet type')

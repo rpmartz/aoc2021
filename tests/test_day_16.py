@@ -50,3 +50,7 @@ class DaySixteen(unittest.TestCase):
         self.assertEqual(packet['type'], 4)
         self.assertEqual(packet['version'], 6)
         self.assertEqual(packet['literal_value'], 2021)
+
+    def test_full_string_38006F45291200(self):
+        hex = '38006F45291200'
+        packets = parse_string(hex)
