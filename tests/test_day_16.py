@@ -20,10 +20,10 @@ class DaySixteen(unittest.TestCase):
     def test_versions(self):
         hex = 'D2FE28'
         expected_version = 6
-        actual = get_packet_version(hex)
+        actual = get_packet_version(hex_to_bin(hex))
         self.assertEqual(expected_version, actual)
 
         hex = '38006F45291200'
         expected_version = 1
-        actual = get_packet_version(hex)
+        actual = get_packet_version(hex_to_bin(hex))
         self.assertEqual(expected_version, actual)
