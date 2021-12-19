@@ -68,5 +68,33 @@ def get_packet_version(binary_str) -> int:
     return int(first_three, 2)
 
 
-def parse_packet(hex_packet):
-    binary_str = hex_to_bin(hex_packet)
+def get_packet_type(binary_str) -> int:
+    version_bits = binary_str[3:6]
+
+    return int(version_bits, 2)
+
+
+def parse_string(hex_string):
+    binary_str = hex_to_bin(hex_string)
+
+    pc = 0
+    while pc < len(binary_str):
+
+        # parse version
+        version_bits = binary_str[pc] + binary_str[pc + 3]
+        packet_version = int(version_bits, 2)
+        pc += 3
+
+        # parse type
+        type_bits = binary_str[pc] + binary_str[pc + 3]
+        packet_type = int(type_bits, 2)
+        pc += 3
+
+        if packet_type == 4:
+            # todo parse literal
+            pass
+        elif packet_type in (0, 1, 2, 3, 5, 6, 7):
+            # todo parse operator
+            pass
+        else:
+            raise Exception('Parsed unexpected packet type')

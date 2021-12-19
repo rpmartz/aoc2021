@@ -27,3 +27,14 @@ class DaySixteen(unittest.TestCase):
         expected_version = 1
         actual = get_packet_version(hex_to_bin(hex))
         self.assertEqual(expected_version, actual)
+
+    def test_type(self):
+        hex = 'D2FE28'
+        expected_type = 4
+        actual = get_packet_type(hex_to_bin(hex))
+        self.assertEqual(expected_type, actual)
+
+        hex = '38006F45291200'
+        expected_type = 6
+        actual = get_packet_type(hex_to_bin(hex))
+        self.assertEqual(expected_type, actual)
