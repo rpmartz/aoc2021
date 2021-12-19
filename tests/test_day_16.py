@@ -10,3 +10,9 @@ class DaySixteen(unittest.TestCase):
         expected = '110100101111111000101000'
         actual = hex_to_bin(hex)
         self.assertEqual(expected, actual)
+
+    def test_38006F45291200(self):
+        hex = '38006F45291200'
+        expected = '00111000000000000110111101000101001010010001001000000000'
+        actual = hex_to_bin(hex)
+        self.assertEqual(expected, actual)
