@@ -1,3 +1,6 @@
+from io import StringIO
+
+
 class Packet:
 
     def __init__(self, version, type_id, literal_value=None, children=None):
@@ -5,6 +8,10 @@ class Packet:
         self.type_id = type_id
         self.literal_value = literal_value
         self.children = children or []
+
+    def __eq__(self, other):
+        return isinstance(other,
+                          Packet) and self.version == other.version and self.type_id == other.type_id and self.children == other.children
 
 
 def hex_to_bin(hex_string):
@@ -31,37 +38,22 @@ def hex_to_bin(hex_string):
     return ''.join(bits)
 
 
-def get_packet_version(binary_str) -> int:
-    first_three = binary_str[0:3]
-
-    return int(first_three, 2)
-
-
-def get_packet_type(binary_str) -> int:
-    version_bits = binary_str[3:6]
-
-    return int(version_bits, 2)
-
-
-def parse_literal(binary_str, pc) -> (int, int):
-    literal_str = ''
-
+def parse_literal(binary_str: StringIO) -> int:
+    literal = 0
     while True:
-        next_bit = binary_str[pc]
-        pc += 1
+        first_bit = int(binary_str.read(1), 2)
+        literal = (literal << 4) | int(binary_str.read(4), 2)
 
-        literal_bits = binary_str[pc:pc + 4]
-        literal_str += literal_bits
-        pc += 4
-
-        if int(next_bit) == 0:
-
-            # read rest of padding
-            while pc % 4 != 0:
-                pc += 1
-
+        if first_bit == 0:
             break
 
-    return int(literal_str, 2), pc
+    return literal
 
 
+def parse_packet(binary_str: StringIO) -> Packet:
+    version = int(binary_str.read(3), 2)
+    type_id = int(binary_str.read(3), 2)
+
+    if type_id == 4:
+        literal_value = parse_literal(binary_str)
+        return Packet(version, type_id, literal_value)
