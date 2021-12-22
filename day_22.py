@@ -15,7 +15,7 @@ def cuboid_from_line(line):
     ranges = line.split(',')
     x_start, x_stop = parse_range(ranges[0])
     y_start, y_stop = parse_range(ranges[1])
-    z_start, z_stop = parse_range(ranges[0])
+    z_start, z_stop = parse_range(ranges[2])
 
     cuboids = set()
 
