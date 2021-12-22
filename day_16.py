@@ -9,6 +9,13 @@ class Packet:
         self.literal_value = literal_value
         self.children = children or []
 
+    def version_sum(self):
+        version_sum = self.version
+        for child in self.children:
+            version_sum += child.version_sum()
+
+        return version_sum
+
     def __eq__(self, other):
         return isinstance(other,
                           Packet) and self.version == other.version and self.type_id == other.type_id and self.children == other.children
