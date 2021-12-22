@@ -17,36 +17,4 @@ class DaySixteen(unittest.TestCase):
         actual = hex_to_bin(hex)
         self.assertEqual(expected, actual)
 
-    def test_versions(self):
-        hex = 'D2FE28'
-        expected_version = 6
-        actual = get_packet_version(hex_to_bin(hex))
-        self.assertEqual(expected_version, actual)
 
-        hex = '38006F45291200'
-        expected_version = 1
-        actual = get_packet_version(hex_to_bin(hex))
-        self.assertEqual(expected_version, actual)
-
-    def test_type(self):
-        hex = 'D2FE28'
-        expected_type = 4
-        actual = get_packet_type(hex_to_bin(hex))
-        self.assertEqual(expected_type, actual)
-
-        hex = '38006F45291200'
-        expected_type = 6
-        actual = get_packet_type(hex_to_bin(hex))
-        self.assertEqual(expected_type, actual)
-
-    def test_parsing_full_string(self):
-        hex = 'D2FE28'
-
-        packets = parse_string(hex, [], 0)
-        self.assertEqual(1, len(packets))
-
-        packet = packets[0]
-
-        self.assertEqual(packet['type'], 4)
-        self.assertEqual(packet['version'], 6)
-        self.assertEqual(packet['literal_value'], 2021)
