@@ -42,6 +42,8 @@ def parse_literal(binary_str: StringIO) -> int:
     literal = 0
     while True:
         first_bit = int(binary_str.read(1), 2)
+        # shifting left and then ORing with the next 4 bits is like appending
+        # the string values to the end of a string
         literal = (literal << 4) | int(binary_str.read(4), 2)
 
         if first_bit == 0:
