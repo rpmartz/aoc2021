@@ -61,4 +61,8 @@ def process(lines):
 
 
 if __name__ == '__main__':
-    line = 'on x=10..12,y=10..12,z=10..12'
+    with open('data/day22.txt', 'r') as f:
+        lines = [line.strip() for line in f.readlines()]
+
+    result = process(lines)
+    print(len(result['on']))
