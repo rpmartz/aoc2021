@@ -27,5 +27,38 @@ def cuboid_from_line(line):
     return direction, cuboids
 
 
+def process(lines):
+    state = {
+        'on': set(),
+        'off': set(),
+    }
+
+    for line in lines:
+        direction, cuboids = cuboid_from_line(line)
+        if direction == 'on':
+            off_cuboids = state['off']
+            on_cuboids = state['on']
+            for cuboid in cuboids:
+                on_cuboids.add(cuboid)
+                if cuboid in off_cuboids:
+                    off_cuboids.remove(cuboid)
+
+            state['on'] = on_cuboids
+            state['off'] = off_cuboids
+
+        else:
+            off_cuboids = state['off']
+            on_cuboids = state['on']
+            for cuboid in cuboids:
+                if cuboid in on_cuboids:
+                    on_cuboids.remove(cuboid)
+                off_cuboids.add(cuboid)
+
+            state['on'] = on_cuboids
+            state['off'] = off_cuboids
+
+    return state
+
+
 if __name__ == '__main__':
     line = 'on x=10..12,y=10..12,z=10..12'
