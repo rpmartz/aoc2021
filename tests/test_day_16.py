@@ -24,3 +24,26 @@ class DaySixteen(unittest.TestCase):
         actual = parse_packet(StringIO(hex_to_bin(hex)))
 
         self.assertEqual(expected, actual)
+
+    def test_first_example_operator_packet(self):
+        hex = '38006F45291200'
+
+        expected = Packet(version=1, type_id=6, children=[
+            Packet(version=6, type_id=4, literal_value=10),
+            Packet(version=2, type_id=4, literal_value=20)
+        ])
+        actual = parse_packet(StringIO(hex_to_bin(hex)))
+
+        self.assertEqual(expected, actual)
+
+    def test_second_example_operator_packet(self):
+        hex = 'EE00D40C823060'
+
+        expected = Packet(version=7, type_id=3, children=[
+            Packet(version=2, type_id=4, literal_value=1),
+            Packet(version=4, type_id=4, literal_value=2),
+            Packet(version=1, type_id=4, literal_value=3)
+        ])
+        actual = parse_packet(StringIO(hex_to_bin(hex)))
+
+        self.assertEqual(expected, actual)

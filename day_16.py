@@ -52,6 +52,15 @@ def parse_literal(binary_str: StringIO) -> int:
     return literal
 
 
+def parse_packets(binary_str: StringIO):
+    packets = []
+    while True:
+        try:
+            packets.append(parse_packet(binary_str))
+        except Exception:
+            return packets
+
+
 def parse_packet(binary_str: StringIO) -> Packet:
     version = int(binary_str.read(3), 2)
     type_id = int(binary_str.read(3), 2)
@@ -59,3 +68,15 @@ def parse_packet(binary_str: StringIO) -> Packet:
     if type_id == 4:
         literal_value = parse_literal(binary_str)
         return Packet(version, type_id, literal_value)
+    else:
+        length_type_id = int(binary_str.read(1))
+        if length_type_id == 0:
+            # next 15 bits are a number that represents the total length in bits of the sub-packets contained in the packet
+            num_bits = int(binary_str.read(15), 2)
+            children = parse_packets(StringIO(binary_str.read(num_bits)))
+        elif length_type_id == 1:
+            # next 11 bits are number that represents number of sub-packets contained in the packet
+            num_sub_packets = int(binary_str.read(11), 2)
+            children = [parse_packet(binary_str) for _ in range(num_sub_packets)]
+
+        return Packet(version, type_id, children=children)
