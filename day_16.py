@@ -16,6 +16,38 @@ class Packet:
 
         return version_sum
 
+    def calculate(self):
+        subexpression_results = [child.calculate() for child in self.children]
+        if self.type_id == 0:
+            return sum(subexpression_results)
+        elif self.type_id == 1:
+            accum = 1
+            for val in subexpression_results:
+                accum = accum * val
+
+            return accum
+        elif self.type_id == 2:
+            return min(subexpression_results)
+        elif self.type_id == 3:
+            return max(subexpression_results)
+        elif self.type_id == 4:
+            return self.literal_value
+        elif self.type_id == 5:
+            if subexpression_results[0] > subexpression_results[1]:
+                return 1
+
+            return 0
+        elif self.type_id == 6:
+            if subexpression_results[0] < subexpression_results[1]:
+                return 1
+
+            return 0
+        elif self.type_id == 7:
+            if subexpression_results[0] == subexpression_results[1]:
+                return 1
+
+            return 0
+
     def __eq__(self, other):
         return isinstance(other,
                           Packet) and self.version == other.version and self.type_id == other.type_id and self.children == other.children
@@ -95,3 +127,4 @@ if __name__ == '__main__':
 
     packet = parse_packet(StringIO(hex_to_bin(hex.strip())))
     print(packet.version_sum())
+    print(packet.calculate())
