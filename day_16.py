@@ -87,3 +87,11 @@ def parse_packet(binary_str: StringIO) -> Packet:
             children = [parse_packet(binary_str) for _ in range(num_sub_packets)]
 
         return Packet(version, type_id, children=children)
+
+
+if __name__ == '__main__':
+    with open('data/day16.txt', 'r') as f:
+        hex = f.read()
+
+    packet = parse_packet(StringIO(hex_to_bin(hex.strip())))
+    print(packet.version_sum())
