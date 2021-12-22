@@ -22,7 +22,12 @@ def cuboid_from_line(line):
     for x in range(x_start, x_stop + 1):
         for y in range(y_start, y_stop + 1):
             for z in range(z_start, z_stop + 1):
-                cuboids.add((x, y, z))
+                x_in_bounds = -50 <= x <= 50
+                y_in_bounds = -50 <= y <= 50
+                z_in_bounds = -50 <= z <= 50
+
+                if all([x_in_bounds, y_in_bounds, z_in_bounds]):
+                    cuboids.add((x, y, z))
 
     return direction, cuboids
 
