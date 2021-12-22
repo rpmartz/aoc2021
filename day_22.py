@@ -19,15 +19,10 @@ def cuboid_from_line(line):
 
     cuboids = set()
 
-    for x in range(x_start, x_stop + 1):
-        for y in range(y_start, y_stop + 1):
-            for z in range(z_start, z_stop + 1):
-                x_in_bounds = -50 <= x <= 50
-                y_in_bounds = -50 <= y <= 50
-                z_in_bounds = -50 <= z <= 50
-
-                if all([x_in_bounds, y_in_bounds, z_in_bounds]):
-                    cuboids.add((x, y, z))
+    for x in range(max(x_start, -50), min(50, x_stop) + 1):
+        for y in range(max(y_start, -50), min(50, y_stop) + 1):
+            for z in range(max(z_start, -50), min(50, z_stop) + 1):
+                cuboids.add((x, y, z))
 
     return direction, cuboids
 
