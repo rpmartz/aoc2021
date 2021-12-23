@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from day_17 import process_step, build_target_grid
+from day_17 import process_step, build_target_grid, find_max_height_for_initial_velocity
 
 
 class Test(TestCase):
@@ -58,3 +58,8 @@ class Test(TestCase):
 
         corners = {(150, -70), (150, -129), (171, -129), (171, -129)}
         self.assertTrue(all([point in target_grid for point in corners]))
+
+    def test_example(self):
+        expected = 45
+        actual = find_max_height_for_initial_velocity(6, 9, 20, 30, -10, 5)
+        self.assertEqual(expected, actual)

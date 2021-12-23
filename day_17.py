@@ -20,6 +20,31 @@ def process_step(x, y):
     return (new_x, new_y)
 
 
+def find_max_height_for_initial_velocity(dx, dy, grid_x0, grid_x1, grid_y0, grid_y1):
+    position = 0, 0
+    max_height = 0
+    while True:
+        # update position based on vector
+        position = position[0] + dx, position[1] + dy
+        max_height = max(max_height, position[1])
+
+        # check whether we have hit target and add max and exit if so
+        within_x_bounds = grid_x0 <= position[0] <= grid_x1
+        within_y_bounds = grid_y0 <= position[1] <= grid_y1
+        if within_x_bounds and within_y_bounds:
+            return max_height
+
+        # check whether we are outside bounds of grid and exit if so
+        missed_horizontally = (dx == 0 and position[0] < grid_x0) or (dx == 0 and position[0] > grid_x1)
+        missed_vertically = position[1] < grid_y1
+        if missed_horizontally or missed_vertically:
+            return None
+
+        # update velocity based on steps
+
+        dx, dy = process_step(dx, dy)
+
+
 if __name__ == '__main__':
     target_grid = build_target_grid(150, 171, -70, -129)
 
