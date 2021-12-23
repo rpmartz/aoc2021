@@ -46,27 +46,13 @@ def find_max_height_for_initial_velocity(dx, dy, grid_x0, grid_x1, grid_y0, grid
 
 
 if __name__ == '__main__':
-    target_grid = build_target_grid(150, 171, -70, -129)
+    x0, x1, y0, y1 = 150, 171, -70, -129
 
-    initial_position = (0, 0)
-    max_y = -999999999
-    for d_x in range(172, 0, -1):
-        for d_y in range(-130, 500):
+    max_height = 0
+    for x_vel in range(-1000, 1000):
+        for y_vel in range(-1000, 1000):
+            local_max = find_max_height_for_initial_velocity(x_vel, y_vel, x0, x1, y0, y1)
+            if local_max:
+                max_height = max(max_height, local_max)
 
-            # d_x, d_y is vector of initial launch
-            # run steps
-            position = (0 + d_x, 0 + d_y)
-            # iterate until either probe in target or we know probe missed
-            heights = set()
-            while True:
-                heights.add(position[1])
-                position = process_step(position[0], position[1])
-
-                if position in target_grid:
-                    # capture max height and end iteration
-                    max_y = max(max_y, max(heights))
-                    break
-                elif position[0] > 171 or position[1] < -129:
-                    break
-
-    print(max_y)
+    print(max_height)
