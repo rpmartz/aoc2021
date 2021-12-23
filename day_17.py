@@ -20,32 +20,43 @@ def process_step(x, y):
     return (new_x, new_y)
 
 
+def find_max_height_for_initial_velocity(dx, dy, grid_x0, grid_x1, grid_y0, grid_y1):
+    position = 0, 0
+    max_height = 0
+    while True:
+        # update position based on vector
+        position = position[0] + dx, position[1] + dy
+        x, y = position
+        print(f'Updated position to ({x}, {y}) dx={dx}, dy={dy}')
+        max_height = max(max_height, y)
+
+        # check whether we have hit target and add max and exit if so
+        within_x_bounds = grid_x0 <= x <= grid_x1
+        within_y_bounds = grid_y0 <= y <= grid_y1
+        if within_x_bounds and within_y_bounds:
+            print(f'Probe hit ({x}, {y}) dx={dx}, dy={dy}, max_height={max_height}')
+            return max_height
+
+        # check whether we are outside bounds of grid and exit if so
+        missed_horizontally = (dx == 0 and x < grid_x0) or x > grid_x1
+        missed_vertically = y < grid_y1
+        if missed_horizontally or missed_vertically:
+            print(f'Miss at ({x}, {y}) dx={dx}, dy={dy}')
+            return None
+
+        # update velocity based on steps
+
+        dx, dy = process_step(dx, dy)
+
+
 if __name__ == '__main__':
-    target_grid = build_target_grid(150, 171, -70, -129)
+    x0, x1, y0, y1 = 150, 171, -70, -129
 
-    corners = {(150, -70), (150, -129), (171, -129), (171, -129)}
-    if not all([point in target_grid for point in corners]):
-        print('Check bounds')
+    max_height = 0
+    for x_vel in range(1, 30):
+        for y_vel in range(30):
+            local_max = find_max_height_for_initial_velocity(x_vel, y_vel, x0, x1, y0, y1)
+            if local_max:
+                max_height = max(max_height, local_max)
 
-    initial_position = (0, 0)
-    max_y = -999999999
-    for d_x in range(172, 0, -1):
-        for d_y in range(-130, 500):
-
-            # d_x, d_y is vector of initial launch
-            # run steps
-            position = (0 + d_x, 0 + d_y)
-            # iterate until either probe in target or we know probe missed
-            heights = set()
-            while True:
-                heights.add(position[1])
-                position = process_step(position[0], position[1])
-
-                if position in target_grid:
-                    # capture max height and end iteration
-                    max_y = max(max_y, max(heights))
-                    break
-                elif position[0] > 171 or position[1] < -129:
-                    break
-
-    print(max_y)
+    print(max_height)
