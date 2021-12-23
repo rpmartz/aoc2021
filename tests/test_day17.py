@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from day_17 import process_step
+from day_17 import process_step, build_target_grid
 
 
 class Test(TestCase):
@@ -52,3 +52,9 @@ class Test(TestCase):
         expected_4 = (0, -1)
         v = process_step(v[0], v[1])
         self.assertEqual(expected_4, v)
+
+    def test_build_target_grid(self):
+        target_grid = build_target_grid(150, 171, -70, -129)
+
+        corners = {(150, -70), (150, -129), (171, -129), (171, -129)}
+        self.assertTrue(all([point in target_grid for point in corners]))

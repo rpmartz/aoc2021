@@ -23,10 +23,6 @@ def process_step(x, y):
 if __name__ == '__main__':
     target_grid = build_target_grid(150, 171, -70, -129)
 
-    corners = {(150, -70), (150, -129), (171, -129), (171, -129)}
-    if not all([point in target_grid for point in corners]):
-        print('Check bounds')
-
     initial_position = (0, 0)
     max_y = -999999999
     for d_x in range(172, 0, -1):
