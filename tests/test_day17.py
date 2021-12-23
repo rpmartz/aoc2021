@@ -61,5 +61,5 @@ class Test(TestCase):
 
     def test_example(self):
         expected = 45
-        actual = find_max_height_for_initial_velocity(6, 9, 20, 30, -10, 5)
+        actual = find_max_height_for_initial_velocity(6, 9, 20, 30, -10, -5)
         self.assertEqual(expected, actual)
