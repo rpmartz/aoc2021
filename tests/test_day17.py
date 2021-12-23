@@ -63,3 +63,17 @@ class Test(TestCase):
         expected = 45
         actual = find_max_height_for_initial_velocity(6, 9, 20, 30, -10, -5)
         self.assertEqual(expected, actual)
+
+    def test_example_two(self):
+        expected = 6
+        actual = find_max_height_for_initial_velocity(6, 3, 20, 30, -10, -5)
+        self.assertEqual(expected, actual)
+
+    def test_example_three(self):
+        expected = 0
+        actual = find_max_height_for_initial_velocity(9, 0, 20, 30, -10, -5)
+        self.assertEqual(expected, actual)
+
+    def test_example_that_misses(self):
+        actual = find_max_height_for_initial_velocity(17, -4, 20, 30, -10, -5)
+        self.assertIsNone(actual)
