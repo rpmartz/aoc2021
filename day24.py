@@ -52,12 +52,11 @@ def parse_instructions():
     return parsed_instructions
 
 def is_valid(model_number):
-    x, y, z = 0, 0, 0
+    y, z = 0, 0
     index = 0
 
     w = int(model_number[index])
     index += 1
-    x = 1
     y = 26
     z = z * y
     z = z + (w + 13)
