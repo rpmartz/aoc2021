@@ -64,4 +64,5 @@ def parse_instructions():
 
 if __name__ == '__main__':
     inst = parse_instructions()
-    print('\n'.join(inst))
+    with open('24.txt', 'w') as f:
+        f.writelines('\n'.join(inst))
