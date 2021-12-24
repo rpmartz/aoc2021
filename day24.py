@@ -152,7 +152,7 @@ def is_valid(model_number):
     x = 1
     y = 26
     z = z * y
-    y = (y + 12) * x
+    y = (w + 12) * x
     z = z + y
     w = int(model_number[index])
     index += 1
