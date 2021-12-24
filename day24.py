@@ -60,33 +60,25 @@ def is_valid(model_number):
     x = 1
     y = 26
     z = z * y
-    y = (w + 13)
-    z = z + y
+    z = z + (w + 13)
+    w = int(model_number[index])
+    index += 1
+    z = z * y
+    z = z + (w + 10)
     w = int(model_number[index])
     index += 1
     y = 26
     z = z * y
-    y = (w + 10)
-    z = z + y
-    w = int(model_number[index])
-    index += 1
-    y = 26
-    z = z * y
-    y = (w + 3)
-    z = z + y
+    z = z + (w + 3)
     w = int(model_number[index])
     index += 1
     z = z // 26
-    y = 26
-    z = z * y
-    y = (w + 1)
-    z = z + y
+    z = z * 26
+    z = z + (w + 1)
     w = int(model_number[index])
     index += 1
-    y = 26
-    z = z * y
-    y = (w + 9)
-    z = z + y
+    z = z * 26
+    z = z + w + 9
     w = int(model_number[index])
     index += 1
     z = z // 26
@@ -143,10 +135,8 @@ def is_valid(model_number):
     w = int(model_number[index])
     index += 1
     z = z // 26
-    y = 26
-    z = z * y
-    y = (w + 8)
-    z = z + y
+    z = z * 26
+    z = z + (w + 8)
 
     return z == 0
 
