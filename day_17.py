@@ -32,7 +32,7 @@ def find_max_height_for_initial_velocity(dx, dy, grid_x0, grid_x1, grid_y0, grid
 
         # check whether we have hit target and add max and exit if so
         within_x_bounds = grid_x0 <= x <= grid_x1
-        within_y_bounds = grid_y0 <= y <= grid_y1
+        within_y_bounds = grid_y1 <= y <= grid_y0
         if within_x_bounds and within_y_bounds:
             print(f'Probe hit ({x}, {y}) dx={dx}, dy={dy}, max_height={max_height}')
             return max_height
@@ -53,8 +53,8 @@ if __name__ == '__main__':
     x0, x1, y0, y1 = 150, 171, -70, -129
 
     max_height = 0
-    for x_vel in range(1, 30):
-        for y_vel in range(30):
+    for x_vel in range(1, 1000):
+        for y_vel in range(2000):
             local_max = find_max_height_for_initial_velocity(x_vel, y_vel, x0, x1, y0, y1)
             if local_max:
                 max_height = max(max_height, local_max)
