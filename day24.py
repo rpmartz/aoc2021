@@ -3,304 +3,65 @@ def eql(a, b):
         return 1
 
     return 0
+#
+#
+#
+#
+# start = int(14 * '9')
+#
+# for i in range(start, 0, -1):
+#     model_number = str(i)
+#     if '0' in model_number:
+#         continue
+#
+#     # todo run ALU
+#     pass
 
-def run(model_num):
-    w, x, y, z = 0, 0, 0, 0
-    pc = 0
+def parse(symbol: str):
+    if symbol.isalpha():
+        return symbol
+    else:
+        return int(symbol)
 
-    w = int(model_num[pc])
-    pc += 1
+def parse_instructions():
+    with open('data/day24.txt', 'r') as f:
+        unparsed_lines = [line.strip() for line in f.readlines()]
 
-    # mul x 0
-    # add x z
-    # mod x 26
-    x = z % 26
-    # div z 1
-    # add x 10
-    x = x + 10
-    # eql x w
-    x = eql(x, w)
-    # eql x 0
-    x = eql(x, 0)
-    # mul y 0
-    # add y 25
-    # mul y x
-    # add y 1
-    y = (25 * x) + 1
-    # mul z y
-    z = z * y
-    # mul y 0
-    # add y w
-    # add y 13
-    # mul y x
-    y = (w + 13) * x
-    # add z y
-    z = z + y
-    # inp w
-    w = int(model_num[pc])
-    pc += 1
+    parsed_instructions = []
 
-    # mul x 0
-    x = 0
-    # add x z
-    x = x + z
-    # mod x 26
-    x = x % 26
-    # div z 1
-    z = z / 1
-    # add x 13
-    x = x + 13
-    # eql x w
-    x = eql(x, w)
-    # eql x 0
-    x = eql(x, 0)
-    # mul y 0
-    # add y 25
-    # mul y x
-    # add y 1
-    y = (25 * x) + 1
-    # mul z y
-    z = z * y
-    # mul y 0
-    # add y w
-    # add y 10
-    # mul y x
-    y = (w + 10) * x
-    # add z y
-    z = z + y
-    # inp w
-    w = int(model_num[pc])
-    pc += 1
+    for line in unparsed_lines:
 
-    # mul x 0
-    # add x z
-    # mod x 26
-    # div z 1
-    # add x 13
-    # eql x w
-    # eql x 0
-    # mul y 0
-    # add y 25
-    # mul y x
-    # add y 1
-    # mul z y
-    # mul y 0
-    # add y w
-    # add y 3
-    # mul y x
-    # add z y
-    # inp w
-    # mul x 0
-    # add x z
-    # mod x 26
-    # div z 26
-    # add x -11
-    # eql x w
-    # eql x 0
-    # mul y 0
-    # add y 25
-    # mul y x
-    # add y 1
-    # mul z y
-    # mul y 0
-    # add y w
-    # add y 1
-    # mul y x
-    # add z y
-    # inp w
-    # mul x 0
-    # add x z
-    # mod x 26
-    # div z 1
-    # add x 11
-    # eql x w
-    # eql x 0
-    # mul y 0
-    # add y 25
-    # mul y x
-    # add y 1
-    # mul z y
-    # mul y 0
-    # add y w
-    # add y 9
-    # mul y x
-    # add z y
-    # inp w
-    # mul x 0
-    # add x z
-    # mod x 26
-    # div z 26
-    # add x -4
-    # eql x w
-    # eql x 0
-    # mul y 0
-    # add y 25
-    # mul y x
-    # add y 1
-    # mul z y
-    # mul y 0
-    # add y w
-    # add y 3
-    # mul y x
-    # add z y
-    # inp w
-    # mul x 0
-    # add x z
-    # mod x 26
-    # div z 1
-    # add x 12
-    # eql x w
-    # eql x 0
-    # mul y 0
-    # add y 25
-    # mul y x
-    # add y 1
-    # mul z y
-    # mul y 0
-    # add y w
-    # add y 5
-    # mul y x
-    # add z y
-    # inp w
-    # mul x 0
-    # add x z
-    # mod x 26
-    # div z 1
-    # add x 12
-    # eql x w
-    # eql x 0
-    # mul y 0
-    # add y 25
-    # mul y x
-    # add y 1
-    # mul z y
-    # mul y 0
-    # add y w
-    # add y 1
-    # mul y x
-    # add z y
-    # inp w
-    # mul x 0
-    # add x z
-    # mod x 26
-    # div z 1
-    # add x 15
-    # eql x w
-    # eql x 0
-    # mul y 0
-    # add y 25
-    # mul y x
-    # add y 1
-    # mul z y
-    # mul y 0
-    # add y w
-    # add y 0
-    # mul y x
-    # add z y
-    # inp w
-    # mul x 0
-    # add x z
-    # mod x 26
-    # div z 26
-    # add x -2
-    # eql x w
-    # eql x 0
-    # mul y 0
-    # add y 25
-    # mul y x
-    # add y 1
-    # mul z y
-    # mul y 0
-    # add y w
-    # add y 13
-    # mul y x
-    # add z y
-    # inp w
-    # mul x 0
-    # add x z
-    # mod x 26
-    # div z 26
-    # add x -5
-    # eql x w
-    # eql x 0
-    # mul y 0
-    # add y 25
-    # mul y x
-    # add y 1
-    # mul z y
-    # mul y 0
-    # add y w
-    # add y 7
-    # mul y x
-    # add z y
-    # inp w
-    # mul x 0
-    # add x z
-    # mod x 26
-    # div z 26
-    # add x -11
-    # eql x w
-    # eql x 0
-    # mul y 0
-    # add y 25
-    # mul y x
-    # add y 1
-    # mul z y
-    # mul y 0
-    # add y w
-    # add y 15
-    # mul y x
-    # add z y
-    # inp w
-    # mul x 0
-    # add x z
-    # mod x 26
-    # div z 26
-    # add x -13
-    # eql x w
-    # eql x 0
-    # mul y 0
-    # add y 25
-    # mul y x
-    # add y 1
-    # mul z y
-    # mul y 0
-    # add y w
-    # add y 12
-    # mul y x
-    # add z y
-    # inp w
-    # mul x 0
-    # add x z
-    # mod x 26
-    # div z 26
-    # add x -10
-    # eql x w
-    # eql x 0
-    # mul y 0
-    # add y 25
-    # mul y x
-    # add y 1
-    # mul z y
-    # mul y 0
-    # add y w
-    # add y 8
-    # mul y x
-    # add z y
+        if line.startswith('inp'):
+            op, first = line.split()
 
+            stmt = f'{first} = model_number[index]'
+            parsed_instructions.append(stmt)
 
+            parsed_instructions.append('index += 1')
+        else:
+            op, first, second = line.split()
+            if op == 'inp':
+                stmt = f'{first} = model_number[index]'
+                parsed_instructions.append(stmt)
+                parsed_instructions.append('index += 1')
+            elif op == 'mul':
+                stmt = f'{first} = {first} * {parse(second)}'
+                parsed_instructions.append(stmt)
+            elif op == 'add':
+                stmt = f'{first} = {first} + {parse(second)}'
+                parsed_instructions.append(stmt)
+            elif op == 'div':
+                stmt = f'{first} = {first} // {parse(second)}'
+                parsed_instructions.append(stmt)
+            elif op == 'mod':
+                stmt = f'{first} = {first} % {parse(second)}'
+                parsed_instructions.append(stmt)
+            elif op == 'eql':
+                stmt = f'{first} = eql({first}, {parse(second)})'
+                parsed_instructions.append(stmt)
 
-def run_alu():
-    # push digits on stack
-    pass
+    return parsed_instructions
 
-
-start = int(14 * '9')
-
-for i in range(start, 0, -1):
-    model_number = str(i)
-    if '0' in model_number:
-        continue
-
-    # todo run ALU
-    pass
+if __name__ == '__main__':
+    inst = parse_instructions()
+    print('\n'.join(inst))
