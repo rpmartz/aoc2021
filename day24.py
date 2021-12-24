@@ -26,17 +26,14 @@ def parse_instructions():
         if line.startswith('inp'):
             op, first = line.split()
 
-            stmt = f'{first} = model_number[index]'
+            stmt = f'{first} = int(model_number[index])'
             parsed_instructions.append(stmt)
 
             parsed_instructions.append('index += 1')
         else:
             op, first, second = line.split()
-            if op == 'inp':
-                stmt = f'{first} = int(model_number[index])'
-                parsed_instructions.append(stmt)
-                parsed_instructions.append('index += 1')
-            elif op == 'mul':
+
+            if op == 'mul':
                 stmt = f'{first} = {first} * {parse(second)}'
                 parsed_instructions.append(stmt)
             elif op == 'add':
