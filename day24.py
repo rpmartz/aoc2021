@@ -202,10 +202,13 @@ if __name__ == '__main__':
 
     start = int(14 * '9')
 
-    for i in range(start, 0, -1):
+    for i in range(start, 1, -1):
         model_number = str(i)
         if '0' in model_number:
             continue
         elif is_valid(model_number):
             print(model_number)
             break
+
+        if i % 1000 == 0:
+            print(i)
