@@ -83,8 +83,7 @@ def is_valid(model_number):
     x = z
     x = x % 26
     z = z // 1
-    x = x + 13
-    x = eql(x, w)
+    x = eql(x + 13, w)
     x = eql(x, 0)
     y = 25 * x
     y = y + 1
