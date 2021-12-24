@@ -64,8 +64,7 @@ def is_valid(model_number):
     x = eql(x, w)
     x = eql(x, 0)
     y = 25 * x
-    y = y + 1
-    z = z * y
+    z = z * (y + 1)
     y = w + 13
     y = y * x
     z = z + y
