@@ -27,21 +27,18 @@ def find_max_height_for_initial_velocity(dx, dy, grid_x0, grid_x1, grid_y0, grid
         # update position based on vector
         position = position[0] + dx, position[1] + dy
         x, y = position
-        print(f'Updated position to ({x}, {y}) dx={dx}, dy={dy}')
         max_height = max(max_height, y)
 
         # check whether we have hit target and add max and exit if so
         within_x_bounds = grid_x0 <= x <= grid_x1
         within_y_bounds = grid_y1 <= y <= grid_y0
         if within_x_bounds and within_y_bounds:
-            print(f'Probe hit ({x}, {y}) dx={dx}, dy={dy}, max_height={max_height}')
             return max_height
 
         # check whether we are outside bounds of grid and exit if so
         missed_horizontally = (dx == 0 and x < grid_x0) or x > grid_x1
         missed_vertically = y < grid_y1
         if missed_horizontally or missed_vertically:
-            print(f'Miss at ({x}, {y}) dx={dx}, dy={dy}')
             return None
 
         # update velocity based on steps
