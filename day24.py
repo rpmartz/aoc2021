@@ -138,12 +138,8 @@ def is_valid(model_number):
     x = x + 12
     x = eql(x, w)
     x = eql(x, 0)
-    y = 25 * x
-    y = y + 1
-    z = z * y
-    y = w + 1
-    y = y * x
-    z = z + y
+    z = z * ((25 * x) + 1)
+    z = z + ((w + 1) * x)
     w = int(model_number[index])
     index += 1
     x = z
@@ -152,9 +148,7 @@ def is_valid(model_number):
     x = x + 15
     x = eql(x, w)
     x = eql(x, 0)
-    y = 25 * x
-    y = y + 1
-    z = z * y
+    z = z * ((25 * x) + 1)
     y = w + 0
     y = y * x
     z = z + y
@@ -245,5 +239,5 @@ if __name__ == '__main__':
         elif is_valid(model_number):
             valid_codes.add(int(model_number))
 
-print(f'max: {max(valid_codes)}')
-print(f'min: {min(valid_codes)}')
+    print(f'max: {max(valid_codes)}')
+    print(f'min: {min(valid_codes)}')
