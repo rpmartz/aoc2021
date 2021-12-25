@@ -234,6 +234,8 @@ def is_valid(model_number):
 if __name__ == '__main__':
     start = int(14 * '9')
 
+    valid_codes = set()
+
     for i in range(start, 1, -1):
         if i % 1000000 == 0:
             print(f'Tried from {start} down through {i}')
@@ -241,5 +243,7 @@ if __name__ == '__main__':
         if '0' in model_number:
             continue
         elif is_valid(model_number):
-            print(f'min: {model_number}')
-            break
+            valid_codes.add(int(model_number))
+
+print(f'max: {max(valid_codes)}')
+print(f'min: {min(valid_codes)}')
