@@ -110,9 +110,7 @@ def is_valid(model_number):
     x = x + 11
     x = eql(x, w)
     x = eql(x, 0)
-    y = 25 * x
-    y = y + 1
-    z = z * y
+    z = z * ((25 * x) + 1)
     y = w + 9
     y = y * x
     z = z + y
