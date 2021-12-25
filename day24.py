@@ -77,37 +77,30 @@ def is_valid(model_number):
     x = eql(x, 0)
 
     z = ((z // 26) * ((25 * x) + 1)) + ((25 * x) + 1)
-    w = int(model_number[index])
+
+    z = (z * 26) + (int(model_number[index]) + 5)
     index += 1
-    x = z % 26
-    x = eql(x + 12, w)
-    x = eql(x, 0)
-    z = ((z // 1) * ((25 * x) + 1)) + ((w + 5) * x)
-    w = int(model_number[index])
+
+    z = (26 * z) + (int(model_number[index]) + 1)
     index += 1
-    x = z % 26
-    x = x + 12
-    x = eql(x, w)
-    x = eql(x, 0)
-    z = ((z // 1) * ((25 * x) + 1)) + ((w + 1) * x)
-    w = int(model_number[index])
+
+    z = (26 * z) + int(model_number[index])
     index += 1
-    x = (z % 26) + 15
-    x = eql(x, w)
-    x = eql(x, 0)
-    z = ((z // 1) * ((25 * x) + 1)) + (w * x)
+
     w = int(model_number[index])
     index += 1
     x = (z % 26) + -2
     x = eql(x, w)
     x = eql(x, 0)
     z = ((z // 26) * ((25 * x) + 1)) + ((w + 13) * x)
+
     w = int(model_number[index])
     index += 1
     x = (z % 26) + -5
     x = eql(x, w)
     x = eql(x, 0)
     z = ((z // 26) * ((25 * x) + 1)) + ((w + 7) * x)
+
     w = int(model_number[index])
     index += 1
     x = (z % 26) + -11
