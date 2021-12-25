@@ -52,7 +52,7 @@ def parse_instructions():
     return parsed_instructions
 
 def is_valid(model_number):
-    x, y, z = 0, 0, 0
+
     index = 0
 
     z = int(model_number[index]) + 13
@@ -64,20 +64,18 @@ def is_valid(model_number):
     z = (z * 26) + (int(model_number[index]) + 3)
     index += 1
 
-    w = int(model_number[index])
+    z = ((z // 26) * 26) + (int(model_number[index]) + 1)
     index += 1
-    x = x % 26
-    x = eql(x + -11, w)
-    x = eql(x, 0)
-    z = ((z // 26) * ((25 * x) + 1)) + ((w + 1) * x)
-    w = int(model_number[index])
+
+    z = (26 * z) + (int(model_number[index]) + 9)
     index += 1
-    z = (26 * z) + (w + 9)
+
     w = int(model_number[index])
     index += 1
     x = z % 26
     x = eql(x - 4, w)
     x = eql(x, 0)
+
     z = ((z // 26) * ((25 * x) + 1)) + ((25 * x) + 1)
     w = int(model_number[index])
     index += 1
