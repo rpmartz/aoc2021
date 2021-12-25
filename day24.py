@@ -55,15 +55,15 @@ def is_valid(model_number):
     x, y, z = 0, 0, 0
     index = 0
 
-    w = int(model_number[index])
+    z = int(model_number[index]) + 13
     index += 1
-    z = w + 13
-    w = int(model_number[index])
+
+    z = (26 * z) + (int(model_number[index]) + 10)
     index += 1
-    z = (26 * z) + (w + 10)
-    w = int(model_number[index])
+
+    z = (z * 26) + (int(model_number[index]) + 3)
     index += 1
-    z = (z * 26) + (w + 3)
+
     w = int(model_number[index])
     index += 1
     x = x % 26
