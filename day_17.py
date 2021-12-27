@@ -51,12 +51,13 @@ if __name__ == '__main__':
 
     max_height = 0
     counts = 0
-    for x_vel in range(1, 1000):
-        for y_vel in range(2000):
+    for x_vel in range(1, 172):
+        for y_vel in range(-129, 130):
             local_max = find_max_height_for_initial_velocity(x_vel, y_vel, x0, x1, y0, y1)
             if local_max:
                 counts += 1
                 max_height = max(max_height, local_max)
+                print(f'({x_vel}, {y_vel}) with max height {local_max}')
 
     print(max_height)
     print(counts)
