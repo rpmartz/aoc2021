@@ -31,7 +31,7 @@ def find_max_height_for_initial_velocity(dx, dy, grid_x0, grid_x1, grid_y0, grid
 
         # check whether we have hit target and add max and exit if so
         within_x_bounds = grid_x0 <= x <= grid_x1
-        within_y_bounds = grid_y1 <= y <= grid_y0
+        within_y_bounds = grid_y0 <= y <= grid_y1
         if within_x_bounds and within_y_bounds:
             return max_height
 
@@ -47,7 +47,7 @@ def find_max_height_for_initial_velocity(dx, dy, grid_x0, grid_x1, grid_y0, grid
 
 
 if __name__ == '__main__':
-    x0, x1, y0, y1 = 150, 171, -70, -129
+    x0, x1, y0, y1 = 150, 171, -129, -70
 
     max_height = 0
     counts = 0
