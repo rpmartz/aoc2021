@@ -1,4 +1,21 @@
+import heapq
+
 from aocutils import read_numeric_grid, get_neighbors, Point
+
+
+class PriorityQueue:
+
+    def __init__(self):
+        self.elements = []
+
+    def empty(self):
+        return not self.elements
+
+    def put(self, item, priority):
+        heapq.heappush(self.elements, (priority, item))
+
+    def get(self):
+        return heapq.heappop(self.elements)[1]
 
 
 def read_file():
@@ -9,18 +26,22 @@ def read_file():
 def calculate_min_risk(grid) -> int:
     start = Point(0, 0)
     goal = Point(99, 99)
-    queue = [start]
 
-    came_from = dict()
-    came_from[start] = None
+    # use a priority queue
+    queue = PriorityQueue()
+    queue.put(start, 0)
 
-    while queue:
-        position = queue.pop(0)
+    came_from = {start: None}
+
+    # add way to keep track of movement cost
+    cost_so_far = {start: 0}
+
+    while not queue.empty():
+        position = queue.get()
         neighbors = get_neighbors(position, 8)
 
         # early exit once we have explored enough to get to the end
         if position == goal:
-            print(f'Position is equal to goal, terminating BFS')
             break
 
         for neighbor in neighbors:
@@ -28,11 +49,15 @@ def calculate_min_risk(grid) -> int:
                 # some neighbors will be off of the board/grid
                 continue
 
-            # todo: modify for Djikstra's so that we can prioritize which path to explore
-            #
-            if neighbor not in came_from:
+            # cost to neighbor (risk score in this problem's context) is the cost to get to the position
+            # plus the cost of the new node
+            new_cost = cost_so_far[position] + grid[neighbor]
+            if neighbor not in cost_so_far or new_cost < cost_so_far[position]:
+                cost_so_far[neighbor] = new_cost
+                priority = new_cost
+                queue.put(neighbor, priority)
+
                 came_from[neighbor] = position
-                queue.append(neighbor)
 
     # now we can reconstruct a path back to the front
     path = []
