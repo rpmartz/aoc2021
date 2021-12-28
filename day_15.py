@@ -89,4 +89,5 @@ def calculate_min_risk(grid, goal) -> int:
 
 if __name__ == '__main__':
     grid = read_numeric_grid(read_file())
-    calculate_min_risk(grid, Point(99, 99))
+    risk_score = calculate_min_risk(grid, Point(99, 99))
+    print(risk_score)
