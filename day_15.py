@@ -72,7 +72,7 @@ def calculate_min_risk(grid, goal) -> int:
 
                 came_from[neighbor] = position
 
-    # now we can reconstruct a path back to the front
+    # now we can reconstruct a path back to the start
     path = []
 
     current = goal
