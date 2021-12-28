@@ -31,6 +31,10 @@ def heuristic(a, b):
     return abs(x1 - x2) + abs(y1 - y2)
 
 
+def h2(a, b):
+    return sum(a) - sum(b)
+
+
 def calculate_min_risk(grid, goal) -> int:
     start = Point(0, 0)
 
@@ -67,7 +71,7 @@ def calculate_min_risk(grid, goal) -> int:
 
                 # use heuristic function to add distance to the goal to the priority in
                 # order to prioritize movement toward goal in search
-                priority = new_cost + heuristic(neighbor, goal)
+                priority = new_cost + h2(neighbor, goal)
                 queue.put(neighbor, priority)
 
                 came_from[neighbor] = position
@@ -87,3 +91,10 @@ if __name__ == '__main__':
     grid = read_numeric_grid(read_file())
     risk_score = calculate_min_risk(grid, Point(99, 99))
     print(risk_score)
+
+    goal = Point(99, 99)
+    for point in grid:
+        if heuristic(point, goal) != h2(point, goal):
+            print(f'Found different heuristic values for {point}')
+            print(f'h2: {h2(point, goal)}')
+            print(f'heuristic: {heuristic(point, goal)}')
