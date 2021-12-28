@@ -80,11 +80,7 @@ def calculate_min_risk(grid, goal) -> int:
         path.append(current)
         current = came_from[current]
 
-    path.append(start)
-    path.reverse()
-
-    # path[1:] so that we only count score for start if we enter it a second time
-    return sum(grid[point] for point in path[1:])
+    return sum(grid[point] for point in path)
 
 
 if __name__ == '__main__':
