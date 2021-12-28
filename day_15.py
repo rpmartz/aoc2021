@@ -31,9 +31,8 @@ def heuristic(a, b):
     return abs(x1 - x2) + abs(y1 - y2)
 
 
-def calculate_min_risk(grid) -> int:
+def calculate_min_risk(grid, goal) -> int:
     start = Point(0, 0)
-    goal = Point(99, 99)
 
     # use a priority queue
     queue = PriorityQueue()
@@ -83,11 +82,10 @@ def calculate_min_risk(grid) -> int:
 
     path.append(start)
     path.reverse()
-    print(path)
 
-    return -2
+    return sum(grid[point] for point in path)
 
 
 if __name__ == '__main__':
     grid = read_numeric_grid(read_file())
-    calculate_min_risk(grid)
+    calculate_min_risk(grid, Point(99, 99))

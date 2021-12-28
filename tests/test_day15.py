@@ -1,6 +1,6 @@
 import unittest
 
-from aocutils import read_numeric_grid
+from aocutils import read_numeric_grid, Point
 from day_15 import calculate_min_risk
 
 example_input = """\
@@ -21,6 +21,6 @@ class DayFifteenTest(unittest.TestCase):
 
     def test_problem_example_risk_score(self):
         expected = 40
-        actual = calculate_min_risk(read_numeric_grid(example_input))
+        actual = calculate_min_risk(read_numeric_grid(example_input), Point(9, 9))
 
         self.assertEqual(expected, actual)
