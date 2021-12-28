@@ -51,7 +51,7 @@ def calculate_min_risk(grid) -> int:
         if position == goal:
             break
 
-        neighbors = get_neighbors(position, 8)
+        neighbors = get_neighbors(position, 4)
 
         for neighbor in neighbors:
             if neighbor not in grid:
