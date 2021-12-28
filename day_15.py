@@ -23,6 +23,14 @@ def read_file():
         return f.read()
 
 
+def heuristic(a, b):
+    # simple distance between points heuristic
+    (x1, y1) = a
+    (x2, y2) = b
+
+    return abs(x1 - x2) + abs(y1 - y2)
+
+
 def calculate_min_risk(grid) -> int:
     start = Point(0, 0)
     goal = Point(99, 99)
@@ -38,11 +46,12 @@ def calculate_min_risk(grid) -> int:
 
     while not queue.empty():
         position = queue.get()
-        neighbors = get_neighbors(position, 8)
 
         # early exit once we have explored enough to get to the end
         if position == goal:
             break
+
+        neighbors = get_neighbors(position, 8)
 
         for neighbor in neighbors:
             if neighbor not in grid:
@@ -52,9 +61,14 @@ def calculate_min_risk(grid) -> int:
             # cost to neighbor (risk score in this problem's context) is the cost to get to the position
             # plus the cost of the new node
             new_cost = cost_so_far[position] + grid[neighbor]
+
+            # if we don't yet have a cost to get to this location, or this is a better path, let's process it
             if neighbor not in cost_so_far or new_cost < cost_so_far[position]:
                 cost_so_far[neighbor] = new_cost
-                priority = new_cost
+
+                # use heuristic function to add distance to the goal to the priority in
+                # order to prioritize movement toward goal in search
+                priority = new_cost + heuristic(neighbor, goal)
                 queue.put(neighbor, priority)
 
                 came_from[neighbor] = position
