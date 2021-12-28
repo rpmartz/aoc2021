@@ -8,6 +8,7 @@ def read_file():
 
 def calculate_min_risk(grid) -> int:
     start = Point(0, 0)
+    goal = Point(99, 99)
     queue = [start]
 
     came_from = dict()
@@ -16,6 +17,11 @@ def calculate_min_risk(grid) -> int:
     while queue:
         position = queue.pop(0)
         neighbors = get_neighbors(position, 8)
+
+        # early exit once we have explored enough to get to the end
+        if position == goal:
+            print(f'Position is equal to goal, terminating BFS')
+            break
 
         for neighbor in neighbors:
             if neighbor not in grid:
@@ -29,8 +35,6 @@ def calculate_min_risk(grid) -> int:
                 queue.append(neighbor)
 
     # now we can reconstruct a path back to the front
-    goal = Point(99, 99)
-    start = Point(0, 0)
     path = []
 
     current = goal
