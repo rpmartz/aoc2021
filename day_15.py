@@ -23,6 +23,7 @@ def read_file():
         return f.read()
 
 
+# TODO this makes for a longer and suboptimal path. Why?
 def heuristic(a, b):
     # simple distance between points heuristic
     (x1, y1) = a
