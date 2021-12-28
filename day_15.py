@@ -1,4 +1,4 @@
-from aocutils import read_numeric_grid
+from aocutils import read_numeric_grid, get_neighbors, Point
 
 
 def read_file():
@@ -7,6 +7,22 @@ def read_file():
 
 
 def calculate_min_risk(grid) -> int:
+    start = Point(0, 0)
+
+    queue = [start]
+    while queue:
+        position = queue.pop(0)
+        neighbors = get_neighbors(position, 8)
+
+        for neighbor in neighbors:
+            if neighbor not in grid:
+                # some neighbors will be off of the board/grid
+                continue
+
+            if grid[neighbor] != 'reached':
+                grid[neighbor] = 'reached'
+                queue.append(neighbor)
+
     return -2
 
 
