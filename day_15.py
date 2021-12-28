@@ -28,7 +28,19 @@ def calculate_min_risk(grid) -> int:
                 came_from[neighbor] = position
                 queue.append(neighbor)
 
-    print(came_from)
+    # now we can reconstruct a path back to the front
+    goal = Point(99, 99)
+    start = Point(0, 0)
+    path = []
+
+    current = goal
+    while current != start:
+        path.append(current)
+        current = came_from[current]
+
+    path.append(start)
+    path.reverse()
+    print(path)
 
     return -2
 
