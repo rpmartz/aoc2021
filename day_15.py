@@ -88,14 +88,27 @@ def calculate_min_risk(grid, goal) -> int:
     return sum(grid[point] for point in path)
 
 
+def build_five_x_grid(grid):
+    # go down 5x first
+    for i in (1, 6):
+        new_coord_offset = i * 10
+
+        existing_coords =
+        new_coords = ()
+        # 0 -> 10
+        # 1 -> 11
+        # 9 -> 19
+        ## increment multiple to 2
+        # 10 -> 20
+    # multiple (counter) * position
+
+    # then go right 5x
+
+
 if __name__ == '__main__':
     grid = read_numeric_grid(read_file())
-    risk_score = calculate_min_risk(grid, Point(99, 99))
+    goal = Point(99, 99)
+    risk_score = calculate_min_risk(grid, goal)
     print(risk_score)
 
-    goal = Point(99, 99)
-    for point in grid:
-        if heuristic(point, goal) != h2(point, goal):
-            print(f'Found different heuristic values for {point}')
-            print(f'h2: {h2(point, goal)}')
-            print(f'heuristic: {heuristic(point, goal)}')
+    five_x_grid = build_five_x_grid(grid)
