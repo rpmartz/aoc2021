@@ -1,2 +1,6 @@
 if __name__ == '__main__':
-    print('Day 18 coming in hot')
+    with open('data/day18.txt', 'r') as f:
+        lines = f.readlines()
+
+    for line in lines:
+        print(line.strip())
