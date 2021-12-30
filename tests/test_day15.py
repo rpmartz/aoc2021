@@ -78,12 +78,12 @@ class DayFifteenTest(unittest.TestCase):
         self.assertEqual(expected, actual)
 
     def test_enlarging_grid(self):
-        big_grid = build_five_x_grid(read_numeric_grid(example_input))
+        big_grid = build_five_x_grid(example_input)
 
         self.assertEqual(big_grid[(0, 0)], 1)
-        self.assertEqual(big_grid[[0, 49]], 6)
-        self.assertEqual(big_grid[[49, 0]], 6)
-        self.assertEqual(big_grid[[49, 49]], 9)
+        self.assertEqual(big_grid[(0, 49)], 6)
+        self.assertEqual(big_grid[(49, 0)], 6)
+        self.assertEqual(big_grid[(49, 49)], 9)
 
         self.assertEqual(big_grid[(0, 48)], 8)
         self.assertEqual(big_grid[48, 0], 5)

@@ -1,5 +1,7 @@
 import heapq
 
+import numpy as np
+
 from aocutils import read_numeric_grid, get_neighbors, Point
 
 
@@ -89,20 +91,11 @@ def calculate_min_risk(grid, goal) -> int:
 
 
 def build_five_x_grid(grid):
-    # go down 5x first
-    for i in (1, 6):
-        new_coord_offset = i * 10
-
-        existing_coords =
-        new_coords = ()
-        # 0 -> 10
-        # 1 -> 11
-        # 9 -> 19
-        ## increment multiple to 2
-        # 10 -> 20
-    # multiple (counter) * position
-
-    # then go right 5x
+    risks = np.array([list(row) for row in grid.splitlines()], dtype=int)
+    for axis in 0, 1:
+        risks = np.concatenate([risks + i for i in range(5)], axis=axis)
+    risks = (risks - 1) % 9 + 1
+    return read_numeric_grid('\n'.join(''.join(row) for row in risks.astype(str)))
 
 
 if __name__ == '__main__':
@@ -111,4 +104,6 @@ if __name__ == '__main__':
     risk_score = calculate_min_risk(grid, goal)
     print(risk_score)
 
-    five_x_grid = build_five_x_grid(grid)
+    five_x_grid = build_five_x_grid(read_file())
+    new_risk_score = calculate_min_risk(five_x_grid, Point(499, 499))
+    print(f'5x risk score: {new_risk_score}')
